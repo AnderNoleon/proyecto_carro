@@ -1,66 +1,119 @@
+from PyQt5.QtWidgets import QMainWindow
+
 import sys
-import os
-from datetime import datetime
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from View import diseño
+#from diseño import *
 from PySide2 import QtCore
+
 from PySide2.QtCore import QPropertyAnimation
 from PySide2 import QtCore, QtGui, QtWidgets
 from PyQt5 import uic, QtCore, QtWidgets
 
 
 class Main_window(QMainWindow):
-    def __init__(self) -> None:
-        super(Main_window, self).__init__()
-        uic.loadUi("View/programa.ui", self)
-        #self.ui = Main_login()
+	def __init__(self):
+		super(Main_window, self).__init__()
+		uic.loadUi("View/menu.ui", self)
+		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+		#self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+
+		# eliminar barra y de titulo - opacidad
+		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+		self.setWindowOpacity(1)
+
+		# SizeGrip
+		self.gripSize = 10
+		self.grip = QtWidgets.QSizeGrip(self)
+		self.grip.resize(self.gripSize, self.gripSize)
+
+		# mover ventana
+		self.frame_superior.mouseMoveEvent = self.mover_ventana
+
+		# control barra de titulos
+		self.bt_minimizar.clicked.connect(self.control_bt_minimizar)
+		self.bt_restaurar.clicked.connect(self.control_bt_normal)
+		self.bt_maximizar.clicked.connect(self.control_bt_maximizar)
+		self.bt_cerrar.clicked.connect(lambda: self.close())
+		self.bt_restaurar.hide()
+
+		# acceder a las paginas
+		self.bt_inicio.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page))
+		self.bt_uno.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_uno))
+		self.bt_dos.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_dos))
+		self.bt_tres.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_tres))
+		self.bt_cuatro.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cuatro))
+		self.bt_cinco.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cinco))
+
+		# menu lateral - no funciona
+		self.bt_menu.clicked.connect(self.mover_menu)
+
+	def control_bt_minimizar(self):
+		self.showMinimized()
+
+	def control_bt_normal(self):
+		self.showNormal()
+		self.bt_restaurar.hide()
+		self.bt_maximizar.show()
+
+	def control_bt_maximizar(self):
+		self.showMaximized()
+		self.bt_maximizar.hide()
+		self.bt_restaurar.show()
+
+	def mover_ventana(self, event):
+		if self.isMaximized() == False:
+			if event.buttons() == QtCore.Qt.LeftButton:
+				self.move(self.pos() + event.globalPos() - self.clickPosition)
+				self.clickPosition = event.globalPos()
+				event.accept()
+
+	def mover_menu(self):
+		width = self.frame_lateral.width()
+		normal = 0
+
+		if width == 0:
+			extender = 200
+		else:
+			extender = normal
+
+		self.animacion = QPropertyAnimation(self.frame_lateral, b'minimumWidth')
+		print("errorss")
+		self.animacion.setDuration(300)
+		self.animacion.setStartValue(width)
+		self.animacion.setEndValue(extender)
+		self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+		self.animacion.start()
+
+	#  SizeGrip
+	def resizeEvent(self, event):
+		rect = self.rect()
+		self.grip.move(rect.right() - self.gripSize, rect.bottom() - self.gripSize)
+
+	# mover ventana
+	def mousePressEvent(self, event):
+		self.clickPosition = event.globalPos()
+
+		"""
+		#super().__init__()
+		self.ui = Ui_MainWindow()
+		self.ui.setupUi(self)
 
 
-        self.setWindowFlag(Qt.FramelessWindowHint)
-        self.setWindowOpacity(1)
+		#menu lateral
+		self.ui.bt_menu.clicked.connect(self.mover_menu)
 
-        self.gripSize = 10
-        self.grip = QtWidgets.QSizeGrip(self)
-        self.grip.resize(self.gripSize, self.gripSize)
-
-        #mover ventana
-        # self.ui.frame_superior.mouseMoveEvent = self.mover_ventana
-        # self.frame_superior.mouseMoveEvent = self.mover_ventana
-
-        # acceder a las paginas
-        self.bt_inicio.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page))
-        """
-        self.ui.bt_uno.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_uno))
-        self.ui.bt_dos.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_dos))
-        self.ui.bt_tres.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_tres))
-        self.ui.bt_cuatro.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_cuatro))
-
-        # control barra de titulos
-        self.ui.bt_minimizar.clicked.connect(self.control_bt_minimizar)
-        self.ui.bt_restaurar.clicked.connect(self.control_bt_normal)
-        self.ui.bt_maximizar.clicked.connect(self.control_bt_maximizar)
-        self.ui.bt_cerrar.clicked.connect(lambda: self.close())
-
-        self.ui.bt_restaurar.hide()
-
-
-        # menu lateral
-        self.ui.bt_menu.clicked.connect(self.mover_menu)
-
-    def control_bt_minimizar(self):
-        self.showMinimized()
-
-    def control_bt_normal(self):
-        self.showNormal()
-        self.ui.bt_restaurar.hide()
-        self.ui.bt_maximizar.show()
-
-    def control_bt_maximizar(self):
-        self.showMaximized()
-        self.ui.bt_maximizar.hide()
-        self.ui.bt_restaurar.show()
-
-    def mover_menu(self):
-        pass
-        """
+	def mover_menu(self):
+		if True:
+			width = self.ui.frame_lateral.width()
+			normal = 0
+			if width==0:
+				extender = 200
+			else:
+				extender = normal
+			self.animacion = QPropertyAnimation(self.ui.frame_lateral, b'minimumWidth')
+			self.animacion.setDuration(300)
+			self.animacion.setStartValue(width)
+			self.animacion.setEndValue(extender)
+			self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+			self.animacion.start()			
+	"""
