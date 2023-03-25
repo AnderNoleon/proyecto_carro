@@ -18,7 +18,6 @@ class clase_inventario:
         self.conn = conecciones()
         cursor = self.conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM usuario")
-
         count = cursor.fetchone()[0]
         count = count + 1
         return count

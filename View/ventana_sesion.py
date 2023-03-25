@@ -20,16 +20,13 @@ class Main_login(QMainWindow):
         self.ventana_principal = Main_window()
 
         # boton de abrir
-
         self.btn_entrar.clicked.connect(self.abrir)
 
     def abrir(self):
-        user = self.txt_login.text()
-        pw = self.txt_password.text()
-        # print(f"{user}+{pw}")
-
+        usuario = self.txt_login.text()
+        contra = self.txt_password.text()
         cursor = self.conn.cursor()
-        cursor.execute("select * from usuario where usuario='"+user+"' and contrasena ='"+pw+"'")
+        cursor.execute("select * from usuario where usuario='"+usuario+"' and contrasena ='"+contra+"'")
         result = cursor.fetchone()
         if result:
             self.ventana_principal.show()
