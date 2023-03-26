@@ -2,20 +2,25 @@ from PyQt5.QtWidgets import QMainWindow
 
 import sys
 from View import diseño
-#from diseño import *
 from PySide2 import QtCore
-
 from PySide2.QtCore import QPropertyAnimation
 from PySide2 import QtCore, QtGui, QtWidgets
 from PyQt5 import uic, QtCore, QtWidgets
+from modelos.datos_cliente import ModeloCliente
+from controladores.clienteCon import RegistarCliente
 
 
 class Main_window(QMainWindow):
 	def __init__(self):
+		# cliente
 		super(Main_window, self).__init__()
 		uic.loadUi("View/menu.ui", self)
+		self.modelo_cliente = ModeloCliente()
+		self.registrar_cliente = RegistarCliente()
+		self.cliente_id = self.registrar_cliente.obtener_ultimo_id_cliente()
+
 		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-		#self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+		# self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
 		# eliminar barra y de titulo - opacidad
 		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
@@ -47,6 +52,12 @@ class Main_window(QMainWindow):
 		# menu lateral - no funciona
 		self.bt_menu.clicked.connect(self.mover_menu)
 
+		# aa-------------------------
+		self.bt_guardar_cliente.clicked.connect(lambda: self.modelo_cliente.crearcliente(self.txt_nombre_cliente.text(), self.txt_nit.text(),
+																						self.txt_celular.text(),
+																						self.txt_direccion.text(),
+																						self.txt_tipo.text()))
+
 	def control_bt_minimizar(self):
 		self.showMinimized()
 
@@ -75,14 +86,13 @@ class Main_window(QMainWindow):
 			extender = 200
 		else:
 			extender = normal
-
-		self.animacion = QPropertyAnimation(self.frame_lateral, b'minimumWidth')
-		print("errorss")
-		self.animacion.setDuration(300)
-		self.animacion.setStartValue(width)
-		self.animacion.setEndValue(extender)
-		self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
-		self.animacion.start()
+			#self.animacion = QPropertyAnimation(self.frame_lateral, b"minimumWidth")
+			#print("errorss")
+			#self.animacion.setDuration(300)
+			#self.animacion.setStartValue(width)
+			#self.animacion.setEndValue(extender)
+			#self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+			#self.animacion.start()
 
 	#  SizeGrip
 	def resizeEvent(self, event):
@@ -92,28 +102,3 @@ class Main_window(QMainWindow):
 	# mover ventana
 	def mousePressEvent(self, event):
 		self.clickPosition = event.globalPos()
-
-		"""
-		#super().__init__()
-		self.ui = Ui_MainWindow()
-		self.ui.setupUi(self)
-
-
-		#menu lateral
-		self.ui.bt_menu.clicked.connect(self.mover_menu)
-
-	def mover_menu(self):
-		if True:
-			width = self.ui.frame_lateral.width()
-			normal = 0
-			if width==0:
-				extender = 200
-			else:
-				extender = normal
-			self.animacion = QPropertyAnimation(self.ui.frame_lateral, b'minimumWidth')
-			self.animacion.setDuration(300)
-			self.animacion.setStartValue(width)
-			self.animacion.setEndValue(extender)
-			self.animacion.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
-			self.animacion.start()			
-	"""

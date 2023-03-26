@@ -331,7 +331,7 @@ background-color:red;
         <widget class="QFrame" name="frame_lateral">
          <property name="minimumSize">
           <size>
-           <width>200</width>
+           <width>150</width>
            <height>0</height>
           </size>
          </property>
@@ -433,7 +433,7 @@ font: 75 12pt &quot;Arial Narrow&quot;;
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>   BASE DE DATOS</string>
+             <string>Proveedor</string>
             </property>
             <property name="icon">
              <iconset>
@@ -459,7 +459,7 @@ font: 75 12pt &quot;Arial Narrow&quot;;
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>    ELECTRONICA</string>
+             <string>Cliente</string>
             </property>
             <property name="icon">
              <iconset>
@@ -631,7 +631,7 @@ font: 75 12pt &quot;Arial Narrow&quot;;
              <number>0</number>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page">
              <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -662,14 +662,112 @@ font: 75 12pt &quot;Arial Narrow&quot;;
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_4">
               <item>
-               <widget class="QPushButton" name="pushButton_5">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(85, 170, 255);
-font: 87 36pt &quot;Arial Black&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>1</string>
-                </property>
+               <widget class="QWidget" name="widget" native="true">
+                <widget class="QPushButton" name="btn_guardar_proveedor">
+                 <property name="geometry">
+                  <rect>
+                   <x>290</x>
+                   <y>40</y>
+                   <width>75</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Guardar</string>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_empresa">
+                 <property name="geometry">
+                  <rect>
+                   <x>110</x>
+                   <y>40</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_3">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>40</y>
+                   <width>47</width>
+                   <height>13</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Empresa</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_4">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>80</y>
+                   <width>47</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Cantidad</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_5">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>110</y>
+                   <width>47</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Precio</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_6">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>140</y>
+                   <width>47</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Codigo</string>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_cantidad_pro">
+                 <property name="geometry">
+                  <rect>
+                   <x>110</x>
+                   <y>80</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_precio_pro">
+                 <property name="geometry">
+                  <rect>
+                   <x>110</x>
+                   <y>120</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_codigo_pro">
+                 <property name="geometry">
+                  <rect>
+                   <x>110</x>
+                   <y>150</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
                </widget>
               </item>
              </layout>
@@ -680,14 +778,165 @@ font: 87 36pt &quot;Arial Black&quot;;</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <item>
-               <widget class="QPushButton" name="pushButton_4">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(255, 0, 127);
-font: 87 36pt &quot;Arial Black&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>2</string>
-                </property>
+               <widget class="QWidget" name="widget_2" native="true">
+                <widget class="QLabel" name="label_7">
+                 <property name="geometry">
+                  <rect>
+                   <x>40</x>
+                   <y>50</y>
+                   <width>47</width>
+                   <height>13</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Nombre</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="bt_guardar_cliente">
+                 <property name="geometry">
+                  <rect>
+                   <x>330</x>
+                   <y>50</y>
+                   <width>75</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Guardar</string>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_nombre_cliente">
+                 <property name="geometry">
+                  <rect>
+                   <x>120</x>
+                   <y>50</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_8">
+                 <property name="geometry">
+                  <rect>
+                   <x>40</x>
+                   <y>100</y>
+                   <width>47</width>
+                   <height>13</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>NIT</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_9">
+                 <property name="geometry">
+                  <rect>
+                   <x>40</x>
+                   <y>140</y>
+                   <width>47</width>
+                   <height>13</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Celular</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_10">
+                 <property name="geometry">
+                  <rect>
+                   <x>30</x>
+                   <y>190</y>
+                   <width>47</width>
+                   <height>13</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Direccion</string>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_nit">
+                 <property name="geometry">
+                  <rect>
+                   <x>120</x>
+                   <y>100</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_celular">
+                 <property name="geometry">
+                  <rect>
+                   <x>130</x>
+                   <y>140</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_direccion">
+                 <property name="geometry">
+                  <rect>
+                   <x>120</x>
+                   <y>180</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QComboBox" name="cb_tipo">
+                 <property name="geometry">
+                  <rect>
+                   <x>230</x>
+                   <y>240</y>
+                   <width>131</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Cargo Expreso</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Guatex</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Transportador</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Recoger</string>
+                  </property>
+                 </item>
+                </widget>
+                <widget class="QLabel" name="label_11">
+                 <property name="geometry">
+                  <rect>
+                   <x>40</x>
+                   <y>240</y>
+                   <width>47</width>
+                   <height>13</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Tipo</string>
+                 </property>
+                </widget>
+                <widget class="QLineEdit" name="txt_tipo">
+                 <property name="geometry">
+                  <rect>
+                   <x>110</x>
+                   <y>240</y>
+                   <width>113</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                </widget>
                </widget>
               </item>
              </layout>
