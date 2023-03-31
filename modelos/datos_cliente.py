@@ -23,7 +23,7 @@ class ModeloCliente():
             print("-DATOS ENVIANDOS---")
             self.cliente.insertarCliente(nombre, nit, celular, direccion, tipo)
 
-    def eliminar_produc(self, table):
+    def eliminar_cliente(self, table):
         self.cliente = RegistarCliente()
         table = table
         if table.currentItem() != None:
@@ -32,3 +32,15 @@ class ModeloCliente():
             if product:
                 self.cliente.eliminarcliente(cod)
         self.listar_cliente(table)
+
+    def tipo_medio(self):
+        self.cb_tipo.currentIndexChanged.connect(self.updateTextEdit)
+        selected = self.cb_tipo.currentText()
+        if selected == 'Cargo Expreso':
+            self.txt_tipo.setPlainText('1')
+        elif selected == 'Guatex':
+            self.txt_tipo.setPlainText('2')
+        elif selected == 'Transportador':
+            self.txt_tipo.setPlainText('3')
+        elif selected == 'Recoger':
+            self.txt_tipo.setPlainText('4')

@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
-
+from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QTextEdit, QVBoxLayout
 import sys
 from View import diseño
 from PySide2 import QtCore
@@ -49,6 +49,13 @@ class Main_window(QMainWindow):
 		self.bt_cuatro.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cuatro))
 		self.bt_cinco.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cinco))
 
+		# ver paginas
+		self.btn_usuario_editar.clicked.connect(self.page_usuario)
+		self.btn_usuario_ver.clicked.connect(self.page_usuario_v)
+
+
+		#self.btn_usuario_ver.clicked.connect
+
 		# menu lateral - no funciona
 		self.bt_menu.clicked.connect(self.mover_menu)
 
@@ -57,6 +64,11 @@ class Main_window(QMainWindow):
 																						self.txt_celular.text(),
 																						self.txt_direccion.text(),
 																						self.txt_tipo.text()))
+
+		# elegir
+		#self.cb_tipo = QComboBox(self)
+
+
 
 	def control_bt_minimizar(self):
 		self.showMinimized()
@@ -102,3 +114,21 @@ class Main_window(QMainWindow):
 	# mover ventana
 	def mousePressEvent(self, event):
 		self.clickPosition = event.globalPos()
+
+	def tipo_medio(self):
+		print("er")
+		if self.cb_tipo.currentText() == 'Cargo Expreso':
+			self.txt_tipo.setPlainText('1')
+		elif self.cb_tipo.currentText() == 'Guatex':
+			self.txt_tipo.setPlainText('2')
+		elif self.cb_tipo.currentText() == 'Transportador':
+			self.txt_tipo.setPlainText('3')
+		elif self.cb_tipo.currentText() == 'Recoger':
+			print("Errro")
+			self.txt_tipo.setPlainText('4')
+
+	def page_usuario(self):
+		self.stackedWidget_2.setCurrentWidget(self.page_editar_usuario)
+
+	def page_usuario_v(self):
+		self.stackedWidget_2.setCurrentWidget(self.page_mostrar_usuario)
