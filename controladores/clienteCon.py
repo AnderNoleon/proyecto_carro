@@ -54,3 +54,11 @@ class RegistarCliente:
             sql = "DELETE FROM `proyecto_carro`.`cliente` WHERE idCliente = '"+id+"'"
             cursor.execute(sql)
             self.conn.commit()
+
+    def subirCliente(self, Id, nombre, nit, celular, direccion, tipo):
+        self.conn = conecciones()
+        with self.conn.cursor() as cursor:
+            sql = """UPDATE cliente SET nombre_cliente = %s, nit = %s, celular = %s,
+            direccion = %s, tipo = %s WHERE idCliente= %s """
+            cursor.execute(sql, ( nombre, nit, celular, direccion, tipo, Id))
+            self.conn.commit()

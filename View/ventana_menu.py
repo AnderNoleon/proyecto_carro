@@ -4,9 +4,11 @@ import sys
 from View import diseño
 from PySide2 import QtCore
 from PySide2.QtCore import QPropertyAnimation
+# from View import Main_login
 from PySide2 import QtCore, QtGui, QtWidgets
 from PyQt5 import uic, QtCore, QtWidgets
 from modelos.datos_cliente import ModeloCliente
+from modelos.datos_usuario import ModeloUsuario
 from controladores.clienteCon import RegistarCliente
 
 
@@ -17,6 +19,7 @@ class Main_window(QMainWindow):
 		uic.loadUi("View/menu.ui", self)
 		self.modelo_cliente = ModeloCliente()
 		self.registrar_cliente = RegistarCliente()
+		self.modelo_usuario = ModeloUsuario()
 		self.cliente_id = self.registrar_cliente.obtener_ultimo_id_cliente()
 
 		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
@@ -49,9 +52,12 @@ class Main_window(QMainWindow):
 		self.bt_cuatro.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cuatro))
 		self.bt_cinco.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cinco))
 
-		# ver paginas
+		# ver paginas-----
 		self.btn_usuario_editar.clicked.connect(self.page_usuario)
 		self.btn_usuario_ver.clicked.connect(self.page_usuario_v)
+		# ver paginas -- CLIENTE
+		self.btn_crear_cliente.clicked.connect(self.page_cliente)
+		self.btn_editar_cliente.clicked.connect(self.page_cliente_v)
 
 
 		#self.btn_usuario_ver.clicked.connect
@@ -68,6 +74,18 @@ class Main_window(QMainWindow):
 		# elegir
 		#self.cb_tipo = QComboBox(self)
 
+
+		# TODO USUARIO el eliminar corregir
+		self.btn_listar_usuario.clicked.connect(lambda: self.modelo_usuario.listar_Usuario(self.tabla_usuario))
+		self.btn_actualizar_usuario.clicked.connect(lambda: self.modelo_usuario.subir_usuarios(self.tabla_usuario))
+		self.btn_eliminar_usuario.clicked.connect(lambda: self.modelo_usuario.eliminar_Usuario(self.tabla_usuario))
+		# self.btn_salir_usuario.clicked.connect(self.salir_usuario)
+		# self.ventana_inicio = Main_login()
+
+		# TODO PARA CLIENTES
+		self.bt_guardar_cliente.clicked.connect(self.borrar_cliente)
+		self.btn_lista_cliente.clicked.connect(lambda: self.modelo_cliente.listar_cliente(self.tabla_cliente))
+		self.btn_crear_cliente.clicked.connect(lambda: self.modelo_cliente.eliminar_cliente(self.tabla_cliente))
 
 
 	def control_bt_minimizar(self):
@@ -132,3 +150,16 @@ class Main_window(QMainWindow):
 
 	def page_usuario_v(self):
 		self.stackedWidget_2.setCurrentWidget(self.page_mostrar_usuario)
+
+	def page_cliente(self):
+		self.stackedWidget_3.setCurrentWidget(self.page_crear_cliente)
+
+	def page_cliente_v(self):
+		self.stackedWidget_3.setCurrentWidget(self.page_cliente_e)
+
+	def borrar_cliente(self):
+		self.txt_nombre_cliente.clear()
+		self.txt_nit.clear()
+		self.txt_celular.clear()
+		self.txt_direccion.clear()
+		self.txt_tipo.clear()

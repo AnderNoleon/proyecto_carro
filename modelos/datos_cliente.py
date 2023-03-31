@@ -44,3 +44,21 @@ class ModeloCliente():
             self.txt_tipo.setPlainText('3')
         elif selected == 'Recoger':
             self.txt_tipo.setPlainText('4')
+
+    def subir_usuarios(self, tabla):
+        self.cliente = RegistarCliente()
+        table = tabla
+        products = []
+        fila = []
+        for row_number in range(table.rowCount()):
+            for column_number in range(table.columnCount()):
+                if table.item(row_number, column_number) != None:
+                    fila.append(table.item(row_number, column_number).text())
+            if len(fila) > 0:
+                products.append(fila)
+            fila = []
+
+        if len(products) > 0:
+            for prod in products:
+                self.cliente.subirCliente(prod[0], prod[1], prod[2], prod[3], prod[4], prod[5])
+        self.listar_cliente(tabla)

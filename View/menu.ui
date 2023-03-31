@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>856</width>
-    <height>461</height>
+    <width>904</width>
+    <height>585</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -631,7 +631,7 @@ font: 75 12pt &quot;Arial Narrow&quot;;
              <number>0</number>
             </property>
             <property name="currentIndex">
-             <number>3</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page">
              <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -776,172 +776,391 @@ font: 75 12pt &quot;Arial Narrow&quot;;
              <property name="styleSheet">
               <string notr="true">background-color: rgb(255, 255, 255);</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_5">
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
-               <widget class="QWidget" name="widget_2" native="true">
-                <widget class="QLabel" name="label_7">
-                 <property name="geometry">
-                  <rect>
-                   <x>40</x>
-                   <y>50</y>
-                   <width>47</width>
-                   <height>13</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>Nombre</string>
-                 </property>
-                </widget>
-                <widget class="QPushButton" name="bt_guardar_cliente">
-                 <property name="geometry">
-                  <rect>
-                   <x>330</x>
-                   <y>50</y>
-                   <width>75</width>
-                   <height>23</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>Guardar</string>
-                 </property>
-                </widget>
-                <widget class="QLineEdit" name="txt_nombre_cliente">
-                 <property name="geometry">
-                  <rect>
-                   <x>120</x>
-                   <y>50</y>
-                   <width>113</width>
-                   <height>20</height>
-                  </rect>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_8">
-                 <property name="geometry">
-                  <rect>
-                   <x>40</x>
-                   <y>100</y>
-                   <width>47</width>
-                   <height>13</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>NIT</string>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_9">
-                 <property name="geometry">
-                  <rect>
-                   <x>40</x>
-                   <y>140</y>
-                   <width>47</width>
-                   <height>13</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>Celular</string>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_10">
-                 <property name="geometry">
-                  <rect>
-                   <x>30</x>
-                   <y>190</y>
-                   <width>47</width>
-                   <height>13</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>Direccion</string>
-                 </property>
-                </widget>
-                <widget class="QLineEdit" name="txt_nit">
-                 <property name="geometry">
-                  <rect>
-                   <x>120</x>
-                   <y>100</y>
-                   <width>113</width>
-                   <height>20</height>
-                  </rect>
-                 </property>
-                </widget>
-                <widget class="QLineEdit" name="txt_celular">
-                 <property name="geometry">
-                  <rect>
-                   <x>120</x>
-                   <y>140</y>
-                   <width>113</width>
-                   <height>20</height>
-                  </rect>
-                 </property>
-                </widget>
-                <widget class="QLineEdit" name="txt_direccion">
-                 <property name="geometry">
-                  <rect>
-                   <x>120</x>
-                   <y>180</y>
-                   <width>113</width>
-                   <height>20</height>
-                  </rect>
-                 </property>
-                </widget>
-                <widget class="QComboBox" name="cb_tipo">
-                 <property name="geometry">
-                  <rect>
-                   <x>280</x>
-                   <y>240</y>
-                   <width>131</width>
-                   <height>22</height>
-                  </rect>
-                 </property>
+               <widget class="QFrame" name="frame_7">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_12">
                  <item>
-                  <property name="text">
-                   <string/>
-                  </property>
+                  <widget class="QStackedWidget" name="stackedWidget_3">
+                   <property name="currentIndex">
+                    <number>1</number>
+                   </property>
+                   <widget class="QWidget" name="page_crear_cliente">
+                    <layout class="QVBoxLayout" name="verticalLayout_13">
+                     <item>
+                      <widget class="QFrame" name="page_cliente_crea">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QLabel" name="label_17">
+                        <property name="geometry">
+                         <rect>
+                          <x>30</x>
+                          <y>50</y>
+                          <width>47</width>
+                          <height>13</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Nombre</string>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_nombre_cliente">
+                        <property name="geometry">
+                         <rect>
+                          <x>130</x>
+                          <y>50</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="bt_guardar_cliente">
+                        <property name="geometry">
+                         <rect>
+                          <x>280</x>
+                          <y>50</y>
+                          <width>231</width>
+                          <height>23</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Guardar</string>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_18">
+                        <property name="geometry">
+                         <rect>
+                          <x>30</x>
+                          <y>90</y>
+                          <width>47</width>
+                          <height>13</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>NIT</string>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_nit">
+                        <property name="geometry">
+                         <rect>
+                          <x>130</x>
+                          <y>90</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                        <property name="maxLength">
+                         <number>11</number>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_celular">
+                        <property name="geometry">
+                         <rect>
+                          <x>130</x>
+                          <y>130</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                        <property name="maxLength">
+                         <number>8</number>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_direccion">
+                        <property name="geometry">
+                         <rect>
+                          <x>130</x>
+                          <y>170</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_19">
+                        <property name="geometry">
+                         <rect>
+                          <x>30</x>
+                          <y>130</y>
+                          <width>47</width>
+                          <height>13</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Celular</string>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_20">
+                        <property name="geometry">
+                         <rect>
+                          <x>30</x>
+                          <y>170</y>
+                          <width>47</width>
+                          <height>13</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Direccion</string>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_tipo">
+                        <property name="geometry">
+                         <rect>
+                          <x>130</x>
+                          <y>210</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_21">
+                        <property name="geometry">
+                         <rect>
+                          <x>40</x>
+                          <y>220</y>
+                          <width>47</width>
+                          <height>13</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Tipo</string>
+                        </property>
+                       </widget>
+                       <widget class="QComboBox" name="cb_tipo">
+                        <property name="geometry">
+                         <rect>
+                          <x>260</x>
+                          <y>210</y>
+                          <width>131</width>
+                          <height>22</height>
+                         </rect>
+                        </property>
+                        <item>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Cargo Expreso</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Guatex</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Transportador</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Recoger</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="page_cliente_e">
+                    <layout class="QHBoxLayout" name="horizontalLayout_6">
+                     <item>
+                      <widget class="QFrame" name="page_editar_client">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QTableWidget" name="tabla_cliente">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>10</y>
+                          <width>611</width>
+                          <height>341</height>
+                         </rect>
+                        </property>
+                        <column>
+                         <property name="text">
+                          <string>id</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>Nombre</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>NIT</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>Celular</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>Direccion</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>Tipo</string>
+                         </property>
+                        </column>
+                       </widget>
+                       <widget class="QFrame" name="frame_8">
+                        <property name="geometry">
+                         <rect>
+                          <x>-20</x>
+                          <y>390</y>
+                          <width>684</width>
+                          <height>43</height>
+                         </rect>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>50</height>
+                         </size>
+                        </property>
+                        <property name="frameShape">
+                         <enum>QFrame::StyledPanel</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Raised</enum>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_7">
+                         <item>
+                          <widget class="QFrame" name="frame_11">
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="horizontalSpacer_5">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>402</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="btn_lista_cliente">
+                           <property name="text">
+                            <string>VER</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="btn_actualizar_usuario_2">
+                           <property name="text">
+                            <string>EDITAR</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="btn_eliminar_usuario_2">
+                           <property name="text">
+                            <string>ELIMINAR</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </widget>
                  </item>
                  <item>
-                  <property name="text">
-                   <string>Cargo Expreso</string>
-                  </property>
+                  <widget class="QFrame" name="frame_9">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_4">
+                    <item>
+                     <spacer name="horizontalSpacer_4">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>402</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_10">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="btn_crear_cliente">
+                      <property name="text">
+                       <string>CREAR</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="btn_editar_cliente">
+                      <property name="text">
+                       <string>EDITAR</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="btn_eliminar_cliente">
+                      <property name="text">
+                       <string>ELIMINAR</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
                  </item>
-                 <item>
-                  <property name="text">
-                   <string>Guatex</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Transportador</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Recoger</string>
-                  </property>
-                 </item>
-                </widget>
-                <widget class="QLabel" name="label_11">
-                 <property name="geometry">
-                  <rect>
-                   <x>40</x>
-                   <y>240</y>
-                   <width>47</width>
-                   <height>13</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>Tipo</string>
-                 </property>
-                </widget>
-                <widget class="QLineEdit" name="txt_tipo">
-                 <property name="geometry">
-                  <rect>
-                   <x>120</x>
-                   <y>240</y>
-                   <width>113</width>
-                   <height>20</height>
-                  </rect>
-                 </property>
-                </widget>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -960,7 +1179,7 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                  <item>
                   <widget class="QStackedWidget" name="stackedWidget_2">
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="page_editar_usuario">
                     <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -972,13 +1191,13 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                        <property name="frameShadow">
                         <enum>QFrame::Raised</enum>
                        </property>
-                       <widget class="QTableWidget" name="tableWidget">
+                       <widget class="QTableWidget" name="tabla_usuario">
                         <property name="geometry">
                          <rect>
                           <x>10</x>
                           <y>30</y>
                           <width>611</width>
-                          <height>192</height>
+                          <height>341</height>
                          </rect>
                         </property>
                         <column>
@@ -1015,8 +1234,8 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                        <widget class="QFrame" name="frame_5">
                         <property name="geometry">
                          <rect>
-                          <x>-20</x>
-                          <y>270</y>
+                          <x>10</x>
+                          <y>390</y>
                           <width>684</width>
                           <height>43</height>
                          </rect>
@@ -1058,23 +1277,23 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                           </spacer>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButton_6">
+                          <widget class="QPushButton" name="btn_listar_usuario">
                            <property name="text">
-                            <string>Editar</string>
+                            <string>VER</string>
                            </property>
                           </widget>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButton_8">
+                          <widget class="QPushButton" name="btn_actualizar_usuario">
                            <property name="text">
-                            <string>Ver</string>
+                            <string>EDITAR</string>
                            </property>
                           </widget>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="pushButton_9">
+                          <widget class="QPushButton" name="btn_eliminar_usuario">
                            <property name="text">
-                            <string>PushButton</string>
+                            <string>ELIMINAR</string>
                            </property>
                           </widget>
                          </item>
@@ -1136,7 +1355,7 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>402</width>
+                     <width>531</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -1153,13 +1372,6 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                   <widget class="QPushButton" name="btn_usuario_ver">
                    <property name="text">
                     <string>Ver</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButton_5">
-                   <property name="text">
-                    <string>PushButton</string>
                    </property>
                   </widget>
                  </item>

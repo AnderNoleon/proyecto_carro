@@ -1,54 +1,54 @@
-from server.conexion_sql import conecciones
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QMessageBox
+from controladores.usuarioCon import RegistrarUsuario
+
+# el eliminar, corregir
 
 
-class ModeloUsuario:
+class ModeloUsuario():
     def __int__(self):
-        self.conn = conecciones()
+        self.usuario = RegistrarUsuario()
 
-    def obtener_id_usuario(self):
-        self.conn = conecciones()
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT MAX(idUsuario) FROM usuario")
-        count = cursor.fetchone()[0]
-        count = count + 1
-        return count
+    def listar_Usuario(self, tabla):
+        self.usuario = RegistrarUsuario()
+        table = tabla
+        usuarios = self.usuario.obtener_usuario()
+        table.setRowCount(0)
+        for row_number, row_data in enumerate(usuarios):
+            table.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
 
-    def obtener_ultimo_id_usuario(self):
-        self.conn = conecciones()
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT MAX(idUsuario) FROM usuario")
-        count = cursor.fetchone()[0]
-        return count
+    def crearUsuario(self, usuario, contrasena, nombre, apellido, puesto):
+        self.usuario = RegistrarUsuario()
+        if usuario and contrasena and nombre and apellido and puesto:
+            print("-DATOS ENVIANDOS---")
+            self.usuario.insertarUsuario(usuario, contrasena,nombre,apellido,puesto)
 
-    def obtener_usuario(self):
-        self.conn = conecciones()
-        with self.conn.cursor() as cursor:
-            sql = """SELECT * FROM usuario"""
-            cursor.execute(sql)
-            result = cursor.fetchall()
-            return result
+    def eliminar_Usuario(self, table):
+        self.usuario = RegistrarUsuario()
+        table = table
+        if table.currentItem() != None:
+            cod = table.currentItem().text()
+            product = self.usuario.getUsuario(cod)
+            if product:
+                self.usuario.eliminarUsuario(cod)
+        self.listar_Usuario(table)
 
-    def insertarUsuario(self, usuario, contrasena, nombre, apellido, puesto):
-        print("datos tomados---")
-        self.conn = conecciones()
-        id = self.obtener_id_usuario()
-        with self.conn.cursor() as cursor:
-            sql = """INSERT INTO usuario (idUsuario,usuario,nombre,apellido,puesto) VALUES (%s,%s,%s,%s,%s,%s)"""
-            cursor.execute(sql, (id, usuario, contrasena, nombre, apellido, puesto))
-            self.conn.commit()
+    def subir_usuarios(self, tabla):
+        self.usuario = RegistrarUsuario()
+        table = tabla
+        products = []
+        fila = []
+        for row_number in range(table.rowCount()):
+            for column_number in range(table.columnCount()):
+                if table.item(row_number, column_number) != None:
+                    fila.append(table.item(row_number, column_number).text())
+            if len(fila) > 0:
+                products.append(fila)
+            fila = []
 
-    def getUsuario(self, cod):
-        self.conn = conecciones()
-        with self.conn.cursor() as cursor:
-            sql = "SELECT * FROM usuario WHERE idUsuario = '"+cod+"'"
-            cursor.execute(sql)
-            result = cursor.fetchone()
-            if result:
-                return result
-
-    def eliminarUsuario(self, id):
-        self.conn = conecciones()
-        with self.conn.cursor() as cursor:
-            sql = "DELETE FROM `proyecto_carro`.`usuario` WHERE idUsuario = '"+id+"'"
-            cursor.execute(sql)
-            self.conn.commit()
+        if len(products) > 0:
+            for prod in products:
+                self.usuario.subirUsuario(prod[0], prod[1], prod[2], prod[3], prod[4], prod[5])
+        self.listar_Usuario(tabla)
