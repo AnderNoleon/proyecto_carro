@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QTextEdit, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QTextEdit, QVBoxLayout, QTableWidgetItem,QMessageBox
 import sys
 from View import diseño
 from PySide2 import QtCore
@@ -10,6 +10,8 @@ from PyQt5 import uic, QtCore, QtWidgets
 from modelos.datos_cliente import ModeloCliente
 from modelos.datos_usuario import ModeloUsuario
 from controladores.clienteCon import RegistarCliente
+from controladores.inventarioCon import RegistrarInventario
+from modelos.datos_inventario import ModeloInventario
 
 
 class Main_window(QMainWindow):
@@ -21,6 +23,7 @@ class Main_window(QMainWindow):
 		self.registrar_cliente = RegistarCliente()
 		self.modelo_usuario = ModeloUsuario()
 		self.cliente_id = self.registrar_cliente.obtener_ultimo_id_cliente()
+		self.modelo_inventario = ModeloInventario()
 
 		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
 		# self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -85,8 +88,18 @@ class Main_window(QMainWindow):
 		# TODO PARA CLIENTES
 		self.bt_guardar_cliente.clicked.connect(self.borrar_cliente)
 		self.btn_lista_cliente.clicked.connect(lambda: self.modelo_cliente.listar_cliente(self.tabla_cliente))
-		self.btn_crear_cliente.clicked.connect(lambda: self.modelo_cliente.eliminar_cliente(self.tabla_cliente))
+		self.btn_eliminar_cliente_2.clicked.connect(lambda: self.modelo_cliente.eliminar_cliente(self.tabla_cliente))
+		self.btn_editar_cliente_2.clicked.connect(lambda: self.modelo_cliente.subir_clientes(self.tabla_cliente))
 
+
+		# TODO PARA INVENTARIO
+		self.tabla_pre_venta.itemSelectionChanged.connect(self.cargar_datos_seleccionados)
+		self.row_seleccionada = None
+
+		#self.btn_guardar_in.clicked.connect(lambda: self.modelo_inventario.mostrar_compra(self.tabla_pre_venta))
+		self.btn_guardar_in.clicked.connect(self.mostrar_compra)
+		self.btn_editar_in.clicked.connect(self.editar_datos)
+		self.btn_eliminar_in.clicked.connect(self.eliminar_datos)
 
 	def control_bt_minimizar(self):
 		self.showMinimized()
@@ -163,3 +176,64 @@ class Main_window(QMainWindow):
 		self.txt_celular.clear()
 		self.txt_direccion.clear()
 		self.txt_tipo.clear()
+
+	def mostrar_compra(self):
+		codigo = self.txt_codigo_in.text()
+		carro = self.txt_carro_in.text()
+		cantidad = self.txt_cantidad_in.text()
+		precioc = self.txt_pc_in.text()
+		preciov = self.txt_pv_in.text()
+		# row_position = self.tabla_pre_venta.rowCount()
+		# self.tabla_pre_venta.insertRow(row_position)
+
+		if self.row_seleccionada is None:
+			row_position = self.tabla_pre_venta.rowCount()
+			self.tabla_pre_venta.insertRow(row_position)
+		else:
+			row_position = self.row_seleccionada
+
+		self.tabla_pre_venta.setItem(row_position, 0, QTableWidgetItem(codigo))
+		self.tabla_pre_venta.setItem(row_position, 1, QTableWidgetItem(carro))
+		self.tabla_pre_venta.setItem(row_position, 2, QTableWidgetItem(cantidad))
+		self.tabla_pre_venta.setItem(row_position, 3, QTableWidgetItem(precioc))
+		self.tabla_pre_venta.setItem(row_position, 4, QTableWidgetItem(preciov))
+		self.txt_codigo_in.clear()
+		self.txt_carro_in.clear()
+		self.txt_cantidad_in.clear()
+		self.txt_pc_in.clear()
+		self.txt_pv_in.clear()
+		self.row_seleccionada = None
+
+	def cargar_datos_seleccionados(self):
+		if len(self.tabla_pre_venta.selectedItems()) > 0:
+			items = self.tabla_pre_venta.selectedItems()
+			self.row_seleccionada = items[0].row()
+			self.txt_codigo_in.setText(self.tabla_pre_venta.item(self.row_seleccionada, 0).text())
+			self.txt_carro_in.setText(self.tabla_pre_venta.item(self.row_seleccionada, 1).text())
+			self.txt_cantidad_in.setText(self.tabla_pre_venta.item(self.row_seleccionada, 2).text())
+			self.txt_pc_in.setText(self.tabla_pre_venta.item(self.row_seleccionada, 3).text())
+			self.txt_pv_in.setText(self.tabla_pre_venta.item(self.row_seleccionada, 4).text())
+
+	def editar_datos(self):
+		if self.row_seleccionada is None:
+			QMessageBox.information(self, "Error", "Por favor seleccione una fila para editar.")
+			print("error")
+			return
+
+		self.mostrar_compra()
+
+	def eliminar_datos(self):
+		if self.row_seleccionada is None:
+			QMessageBox.information(self, "Error", "Por favor seleccione una fila para eliminar.")
+			return
+
+		reply = QMessageBox.question(self, 'Eliminar fila', '¿Está seguro de que desea eliminar esta fila?',
+									 QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+		if reply == QMessageBox.Yes:
+			self.tabla_pre_venta.removeRow(self.row_seleccionada)
+			self.txt_codigo_in.clear()
+			self.txt_carro_in.clear()
+			self.txt_cantidad_in.clear()
+			self.txt_pc_in.clear()
+			self.txt_pv_in.clear()
+			self.row_seleccionada = None

@@ -404,7 +404,7 @@ font: 75 12pt &quot;Arial Narrow&quot;;
              <enum>Qt::LeftToRight</enum>
             </property>
             <property name="text">
-             <string>       INICIO             </string>
+             <string>Inventario</string>
             </property>
             <property name="icon">
              <iconset>
@@ -631,27 +631,365 @@ font: 75 12pt &quot;Arial Narrow&quot;;
              <number>0</number>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="page">
              <layout class="QVBoxLayout" name="verticalLayout_9">
               <item>
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string/>
+               <widget class="QFrame" name="frame_12">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
                 </property>
-                <property name="pixmap">
-                 <pixmap>imagen_dos.png</pixmap>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
                 </property>
-                <property name="scaledContents">
-                 <bool>false</bool>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-                <property name="indent">
-                 <number>0</number>
-                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_5">
+                 <item>
+                  <widget class="QStackedWidget" name="stackedWidget_4">
+                   <property name="currentIndex">
+                    <number>1</number>
+                   </property>
+                   <widget class="QWidget" name="page_2"/>
+                   <widget class="QWidget" name="page_3">
+                    <layout class="QHBoxLayout" name="horizontalLayout_10">
+                     <item>
+                      <widget class="QFrame" name="frame_15">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QPushButton" name="btn_guardar_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>290</x>
+                          <y>30</y>
+                          <width>75</width>
+                          <height>23</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>GUARDAR</string>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_codigo_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>140</x>
+                          <y>30</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>30</y>
+                          <width>101</width>
+                          <height>16</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>CODIGO CARRO</string>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_7">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>70</y>
+                          <width>101</width>
+                          <height>16</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>CARRO</string>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_8">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>120</y>
+                          <width>101</width>
+                          <height>16</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Cantidad</string>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_9">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>160</y>
+                          <width>101</width>
+                          <height>16</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Precio Costo</string>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_10">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>200</y>
+                          <width>101</width>
+                          <height>16</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Precio Venta</string>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_carro_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>140</x>
+                          <y>70</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_cantidad_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>140</x>
+                          <y>120</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_pc_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>140</x>
+                          <y>160</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_pv_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>140</x>
+                          <y>200</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_11">
+                        <property name="geometry">
+                         <rect>
+                          <x>300</x>
+                          <y>70</y>
+                          <width>101</width>
+                          <height>16</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>MARCA</string>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_marca_pro">
+                        <property name="geometry">
+                         <rect>
+                          <x>400</x>
+                          <y>70</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_12">
+                        <property name="geometry">
+                         <rect>
+                          <x>300</x>
+                          <y>110</y>
+                          <width>101</width>
+                          <height>16</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>TOTAL</string>
+                        </property>
+                       </widget>
+                       <widget class="QLineEdit" name="txt_total_pro">
+                        <property name="geometry">
+                         <rect>
+                          <x>400</x>
+                          <y>110</y>
+                          <width>113</width>
+                          <height>20</height>
+                         </rect>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="btn_calcular_pro">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>240</y>
+                          <width>75</width>
+                          <height>23</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>CALCULAR</string>
+                        </property>
+                       </widget>
+                       <widget class="QTableWidget" name="tabla_pre_venta">
+                        <property name="geometry">
+                         <rect>
+                          <x>130</x>
+                          <y>230</y>
+                          <width>531</width>
+                          <height>192</height>
+                         </rect>
+                        </property>
+                        <column>
+                         <property name="text">
+                          <string>Codigo</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>Carro</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>Cantidad</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>Precio Costo</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>Precio Venta</string>
+                         </property>
+                        </column>
+                       </widget>
+                       <widget class="QPushButton" name="btn_finalizar_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>280</y>
+                          <width>75</width>
+                          <height>23</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>COMPRADO</string>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="btn_eliminar_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>320</y>
+                          <width>75</width>
+                          <height>23</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>ELIMINAR</string>
+                        </property>
+                       </widget>
+                       <widget class="QPushButton" name="btn_editar_in">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>360</y>
+                          <width>75</width>
+                          <height>23</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Editar</string>
+                        </property>
+                       </widget>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frame_13">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_9">
+                    <item>
+                     <spacer name="horizontalSpacer_6">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>402</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_14">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="btn_crear_cliente_2">
+                      <property name="text">
+                       <string>CREAR</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="btn_editar_cliente_3">
+                      <property name="text">
+                       <string>EDITAR</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="btn_eliminar_cliente_3">
+                      <property name="text">
+                       <string>ELIMINAR</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -978,6 +1316,29 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                     <layout class="QHBoxLayout" name="horizontalLayout_6">
                      <item>
                       <widget class="QFrame" name="page_editar_client">
+                       <property name="styleSheet">
+                        <string notr="true">QFrame{
+background-color:#cfcbff;
+}
+
+
+QPushButton{
+background-color: #aa55ff;
+border-top-left-radius: 20px;
+border-bottom-left-radius: 20px;
+
+font: 75 12pt &quot;Arial Narrow&quot;;
+	
+}
+
+QPushButton:hover{
+background-color: white;
+border-top-left-radius: 20px;
+border-bottom-left-radius: 20px;
+
+font: 75 12pt &quot;Arial Narrow&quot;;
+}</string>
+                       </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
                        </property>
@@ -1027,8 +1388,8 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                        <widget class="QFrame" name="frame_8">
                         <property name="geometry">
                          <rect>
-                          <x>-20</x>
-                          <y>390</y>
+                          <x>-10</x>
+                          <y>380</y>
                           <width>684</width>
                           <height>43</height>
                          </rect>
@@ -1077,14 +1438,14 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                           </widget>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="btn_actualizar_usuario_2">
+                          <widget class="QPushButton" name="btn_editar_cliente_2">
                            <property name="text">
                             <string>EDITAR</string>
                            </property>
                           </widget>
                          </item>
                          <item>
-                          <widget class="QPushButton" name="btn_eliminar_usuario_2">
+                          <widget class="QPushButton" name="btn_eliminar_cliente_2">
                            <property name="text">
                             <string>ELIMINAR</string>
                            </property>

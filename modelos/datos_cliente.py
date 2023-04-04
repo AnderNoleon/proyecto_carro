@@ -45,7 +45,7 @@ class ModeloCliente():
         elif selected == 'Recoger':
             self.txt_tipo.setPlainText('4')
 
-    def subir_usuarios(self, tabla):
+    def subir_clientes(self, tabla):
         self.cliente = RegistarCliente()
         table = tabla
         products = []
@@ -57,7 +57,6 @@ class ModeloCliente():
             if len(fila) > 0:
                 products.append(fila)
             fila = []
-
         if len(products) > 0:
             for prod in products:
                 self.cliente.subirCliente(prod[0], prod[1], prod[2], prod[3], prod[4], prod[5])

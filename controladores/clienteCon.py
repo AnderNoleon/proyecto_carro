@@ -59,6 +59,6 @@ class RegistarCliente:
         self.conn = conecciones()
         with self.conn.cursor() as cursor:
             sql = """UPDATE cliente SET nombre_cliente = %s, nit = %s, celular = %s,
-            direccion = %s, tipo = %s WHERE idCliente= %s """
-            cursor.execute(sql, ( nombre, nit, celular, direccion, tipo, Id))
+            direccion = %s, Tipo_idTipo = %s WHERE idCliente= %s """
+            cursor.execute(sql, (nombre, nit, celular, direccion, tipo, Id))
             self.conn.commit()
