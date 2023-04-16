@@ -8,8 +8,8 @@ from controladores.usuarioCon import RegistrarUsuario
 class ModeloInventario():
     def __int__(self):
         self.usuario = RegistrarUsuario()
-        self.tabla_pre_venta.itemSelectionChanged.connect(self.cargar_datos_seleccionados)
-        self.row_seleccionada = None
+        # self.tabla_pre_venta.itemSelectionChanged.connect(self.cargar_datos_seleccionados)
+        # self.row_seleccionada = None
 
     def listar_Usuario(self, tabla):
         self.usuario = RegistrarUsuario()
@@ -101,3 +101,5 @@ class ModeloInventario():
             return
 
         self.mostrar_compra()
+
+

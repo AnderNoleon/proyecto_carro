@@ -12,6 +12,7 @@ from modelos.datos_usuario import ModeloUsuario
 from controladores.clienteCon import RegistarCliente
 from controladores.inventarioCon import RegistrarInventario
 from modelos.datos_inventario import ModeloInventario
+from server.conexion_sql import conecciones
 
 
 class Main_window(QMainWindow):
@@ -24,6 +25,7 @@ class Main_window(QMainWindow):
 		self.modelo_usuario = ModeloUsuario()
 		self.cliente_id = self.registrar_cliente.obtener_ultimo_id_cliente()
 		self.modelo_inventario = ModeloInventario()
+		self.conn = conecciones()
 
 		self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
 		# self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
@@ -61,6 +63,9 @@ class Main_window(QMainWindow):
 		# ver paginas -- CLIENTE
 		self.btn_crear_cliente.clicked.connect(self.page_cliente)
 		self.btn_editar_cliente.clicked.connect(self.page_cliente_v)
+		# ver paginas ---- INVENTARIO
+		self.btn_crear_inventario.clicked.connect(self.page_inventario_c)
+		self.btn_ver_inventario.clicked.connect(self.page_inventario_v)
 
 
 		#self.btn_usuario_ver.clicked.connect
@@ -100,6 +105,9 @@ class Main_window(QMainWindow):
 		self.btn_guardar_in.clicked.connect(self.mostrar_compra)
 		self.btn_editar_in.clicked.connect(self.editar_datos)
 		self.btn_eliminar_in.clicked.connect(self.eliminar_datos)
+		self.btn_finalizar_in.clicked.connect(self.guardar_datos)
+		self.btn_calcular_pro.clicked.connect(self.calcular_precio)
+		self.btn_calcular_pro.clicked.connect(self.ver_total_de_productos)
 
 	def control_bt_minimizar(self):
 		self.showMinimized()
@@ -170,6 +178,12 @@ class Main_window(QMainWindow):
 	def page_cliente_v(self):
 		self.stackedWidget_3.setCurrentWidget(self.page_cliente_e)
 
+	def page_inventario_v(self):
+		self.stackedWidget_4.setCurrentWidget(self.page_inve_v)
+
+	def page_inventario_c(self):
+		self.stackedWidget_4.setCurrentWidget(self.page_inven_c)
+
 	def borrar_cliente(self):
 		self.txt_nombre_cliente.clear()
 		self.txt_nit.clear()
@@ -237,3 +251,129 @@ class Main_window(QMainWindow):
 			self.txt_pc_in.clear()
 			self.txt_pv_in.clear()
 			self.row_seleccionada = None
+
+	def guardar_datos_t(self):
+		codigo = self.txt_codigo_in.text()
+		carro = self.txt_carro_in.text()
+		cantidad = self.txt_cantidad_in.text()
+		precioc = self.txt_pc_in.text()
+		preciov = self.txt_pv_in.text()
+
+		try:
+			self.conn = conecciones()
+			cursor = self.conn.cursor()
+
+			if not cantidad.isdigit():
+				# Si el campo existencia no es un número, no se puede insertar en la base de datos
+				raise ValueError("La cantidad debe ser un número entero")
+
+			if self.tabla_pre_venta.currentRow() == -1:
+				# No hay fila seleccionada, se inserta un nuevo registro
+				insert_query = """INSERT INTO inventario (codigo_carro, producto, existencia, precio_costo, precio_venta) 
+	                            VALUES (%s, %s, %s, %s, %s)"""
+				data = (codigo, carro, cantidad, precioc, preciov)
+				cursor.execute(insert_query, data)
+			else:
+				# Se actualiza la fila seleccionada
+				self.row_seleccionada = self.tabla_pre_venta.currentRow()
+				update_query = """UPDATE inventario 
+	                            SET codigo_carro = %s, producto = %s, existencia = %s,
+	                            precio_costo = %s, precio_venta = %s 
+	                            WHERE idInventario = %s"""
+				data = (
+				codigo, carro, cantidad, precioc, preciov, self.tabla_pre_venta.item(self.row_seleccionada, 0).text())
+				cursor.execute(update_query, data)
+
+			self.conn.commit()
+			self.mostrar_datos()
+			self.limpiar_campos()
+
+		except ValueError as ve:
+			print(f"Error al guardar datos en la base de datos: {ve}")
+		except Exception as e:
+			print(f"Error al guardar datos en la base de datosd: {e}")
+
+	# VER DATOS DEL INVENTARIO
+
+	def mostrar_datos_carro(self):
+		cursor = self.conn.cursor()
+		select_query = "SELECT * FROM inventario"
+		cursor.execute(select_query)
+		data = cursor.fetchall()
+		self.tabla_pre_venta.setRowCount(0)
+		for row in data:
+			self.tabla_pre_venta.insertRow(0)
+			self.tabla_pre_venta.setItem(0, 0, QTableWidgetItem(str(row[0])))
+			self.tabla_pre_venta.setItem(0, 1, QTableWidgetItem(row[1]))
+			self.tabla_pre_venta.setItem(0, 2, QTableWidgetItem(str(row[2])))
+			self.tabla_pre_venta.setItem(0, 3, QTableWidgetItem(str(row[3])))
+			self.tabla_pre_venta.setItem(0, 4, QTableWidgetItem(str(row[4])))
+
+	def guardar_datos(self):
+		try:
+			self.conn = conecciones()
+			cursor = self.conn.cursor()
+
+			# Recorrer el QTableWidget y agregar los datos a una lista de tuplas
+			datos = []
+			for fila in range(self.tabla_pre_venta.rowCount()):
+				codigo = self.tabla_pre_venta.item(fila, 0).text()
+				carro = self.tabla_pre_venta.item(fila, 1).text()
+				cantidad = self.tabla_pre_venta.item(fila, 2).text()
+				precioc = self.tabla_pre_venta.item(fila, 3).text()
+				preciov = self.tabla_pre_venta.item(fila, 4).text()
+				if not cantidad.isdigit():
+					# Si el campo existencia no es un número, no se puede insertar en la base de datos
+					raise ValueError("La cantidad debe ser un número entero")
+				datos.append((codigo, carro, cantidad, precioc, preciov))
+
+			# Insertar los datos en la base de datos
+			insert_query = """INSERT INTO inventario (codigo_carro, producto, existencia, precio_costo, precio_venta) 
+	                            VALUES (%s, %s, %s, %s, %s)"""
+			cursor.executemany(insert_query, datos)
+			self.conn.commit()
+
+			# Borrar los datos del QTableWidget
+			self.tabla_pre_venta.clearContents()
+			self.tabla_pre_venta.setRowCount(0)
+
+			self.limpiar_campos()
+
+		except ValueError as ve:
+			print(f"Error al guardar datos en la base de datos: {ve}")
+		except Exception as e:
+			print(f"Error al guardar datos en la base de datos: {e}")
+
+	def limpiar_campos(self):
+		self.txt_codigo_in.setText("")
+		self.txt_carro_in.setText("")
+		self.txt_cantidad_in.setText("")
+		self.txt_pc_in.setText("")
+		self.txt_pv_in.setText("")
+		self.tabla_pre_venta.clearContents()
+
+	def calcular_precio(self):
+		cantidad = int(self.txt_cantidad_in.text())
+		precio = float(self.txt_pc_in.text())
+		total = cantidad * precio
+		self.txt_total_pro.setText(str(total))
+
+	def ver_total_de_productos(self):
+		# Inicializar la variable total
+		total = 0
+		# Recorrer las filas de la tabla_pre_venta
+		for fila in range(self.tabla_pre_venta.rowCount()):
+			# Obtener los valores de existencia y precio_costo de la fila actual
+			existencia = int(self.tabla_pre_venta.item(fila, 2).text())
+			precio_costo = float(self.tabla_pre_venta.item(fila, 3).text())
+
+			# Calcular el subtotal de la fila actual
+			subtotal = existencia * precio_costo
+
+			# Sumar el subtotal al total acumulado
+			total += subtotal
+
+		# Mostrar el resultado
+		print("El total de la multiplicación de existencia y precio_costo es:", total)
+		self.txt_total_tabla.setText(str(total))
+
