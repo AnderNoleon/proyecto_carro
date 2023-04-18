@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QTextEdit, QVBoxLayout, QTableWidgetItem,QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QTextEdit, QVBoxLayout, QTableWidgetItem, QMessageBox
 import sys
 from View import diseño
 from PySide2 import QtCore
@@ -9,6 +9,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 from PyQt5 import uic, QtCore, QtWidgets
 from modelos.datos_cliente import ModeloCliente
 from modelos.datos_usuario import ModeloUsuario
+from modelos.datos_proveedor import ModeloPrincipal
 from controladores.clienteCon import RegistarCliente
 from controladores.inventarioCon import RegistrarInventario
 from modelos.datos_inventario import ModeloInventario
@@ -20,6 +21,7 @@ class Main_window(QMainWindow):
 		# cliente
 		super(Main_window, self).__init__()
 		uic.loadUi("View/menu.ui", self)
+		self.modelo_compra = ModeloPrincipal()
 		self.modelo_cliente = ModeloCliente()
 		self.registrar_cliente = RegistarCliente()
 		self.modelo_usuario = ModeloUsuario()
@@ -108,6 +110,9 @@ class Main_window(QMainWindow):
 		self.btn_finalizar_in.clicked.connect(self.guardar_datos)
 		self.btn_calcular_pro.clicked.connect(self.calcular_precio)
 		self.btn_calcular_pro.clicked.connect(self.ver_total_de_productos)
+		self.btn_finalizar_in.clicked.connect(lambda: self.modelo_compra.crearProducto(self.txt_marca_pro.text(), self.txt_total_tabla.text()))
+		self.btn_guardar_in_2.clicked.connect(self.detalle)
+
 
 	def control_bt_minimizar(self):
 		self.showMinimized()
@@ -217,6 +222,36 @@ class Main_window(QMainWindow):
 		self.txt_pc_in.clear()
 		self.txt_pv_in.clear()
 		self.row_seleccionada = None
+
+	# cambiar por el que esta arriba , esta mas completo
+	def mostrar_compraa(self):
+		codigo = self.txt_codigo_in.text()
+		carro = self.txt_carro_in.text()
+		cantidad = self.txt_cantidad_in.text()
+		precioc = self.txt_pc_in.text()
+		preciov = self.txt_pv_in.text()
+
+		if int(cantidad) <= 10:
+			if self.row_seleccionada is None:
+				row_position = self.tabla_pre_venta.rowCount()
+				self.tabla_pre_venta.insertRow(row_position)
+			else:
+				row_position = self.row_seleccionada
+
+			self.tabla_pre_venta.setItem(row_position, 0, QTableWidgetItem(codigo))
+			self.tabla_pre_venta.setItem(row_position, 1, QTableWidgetItem(carro))
+			self.tabla_pre_venta.setItem(row_position, 2, QTableWidgetItem(cantidad))
+			self.tabla_pre_venta.setItem(row_position, 3, QTableWidgetItem(precioc))
+			self.tabla_pre_venta.setItem(row_position, 4, QTableWidgetItem(preciov))
+			self.txt_codigo_in.clear()
+			self.txt_carro_in.clear()
+			self.txt_cantidad_in.clear()
+			self.txt_pc_in.clear()
+			self.txt_pv_in.clear()
+			self.row_seleccionada = None
+		else:
+			# Si la cantidad es mayor a 10, mostrar un mensaje de error al usuario
+			QMessageBox.warning(self, "Error", "La cantidad de existencias debe ser 10 o menos.")
 
 	def cargar_datos_seleccionados(self):
 		if len(self.tabla_pre_venta.selectedItems()) > 0:
@@ -376,4 +411,100 @@ class Main_window(QMainWindow):
 		# Mostrar el resultado
 		print("El total de la multiplicación de existencia y precio_costo es:", total)
 		self.txt_total_tabla.setText(str(total))
+
+	def detalle_inventario_compra(self):
+		try:
+			# Crear cursor para ejecutar consultas
+			self.conn = conecciones()
+			cursor = self.conn.cursor()
+
+			# Obtener el último ID de Inventario y Detalle_vi
+			cursor.execute("SELECT MAX(idInventario) FROM Inventario")
+			max_id_inv = cursor.fetchone()[0]
+			cursor.execute("SELECT MAX(Ventario) FROM detalle_vi")
+			max_id_det = cursor.fetchone()[0]
+
+			# Completar los datos faltantes en Detalle_vi
+			while max_id_det < max_id_inv:
+				max_id_det += 1
+				cursor.execute(
+					"INSERT INTO detalle_vi (Ventario, prove, cantidad, Total) VALUES ( %s, %s, %s, %s)",
+					(max_id_det, max_id_det, 1, 0))
+
+			# Obtener los datos de la última Compra
+			cursor.execute("SELECT MAX(idCompra), empresa, Total FROM Compra")
+			max_id_com, empresa, total_com = cursor.fetchone()
+
+			# Obtener los datos de los productos comprados recientemente
+			cursor.execute("SELECT idInventario, existencia, precio_costo FROM Inventario WHERE idInventario > %s",
+						   (max_id_inv - 1,))
+			productos = cursor.fetchall()
+
+			# Calcular el total de la última compra
+			total_det = sum(p[1] * p[2] for p in productos)
+
+			# Insertar los datos en la tabla Detalle_vi
+			cursor.execute(
+				"INSERT INTO detalle_vi (Ventario, prove, cantidad, Total) VALUES ( %s, %s, %s, %s)",
+				(max_id_com, empresa, len(productos), total_det))
+
+			# Actualizar el total en la tabla Compra
+			cursor.execute("UPDATE Compra SET Total = %s WHERE idCompra = %s", (total_com + total_det, max_id_com))
+
+			# Hacer commit de las transacciones
+			self.conn.commit()
+
+			# Cerrar el cursor y la conexión
+			cursor.close()
+			self.conn.close()
+
+		except Exception as e:
+			print("Error:", e)
+			self.conn.rollback()
+
+	def detalle(self):
+		self.conn = conecciones()
+		cursor = self.conn.cursor()
+
+		# Contar registros en la tabla Inventario
+		cursor.execute("SELECT COUNT(idInventario) FROM Inventario")
+		num_inventario = cursor.fetchone()[0]
+
+		# Contar registros en la tabla detalle_vi
+		cursor.execute("SELECT COUNT(Ventario) FROM detalle_vi")
+		num_detalle = cursor.fetchone()[0]
+
+		# Obtener el último idCompra en la tabla Compra
+		cursor.execute("SELECT MAX(idCompra) FROM Compra")
+		ultimo_id_compra = cursor.fetchone()[0]
+
+		# Mostrar resultados en un print
+		print(f"Registros en Inventario: {num_inventario}")
+		print(f"Registros en detalle_vi: {num_detalle}")
+		print(f"Último idCompra: {ultimo_id_compra}")
+
+		# Obtener los números que faltan en detalle_vi
+		cursor.execute(
+			"SELECT idInventario, existencia, precio_costo FROM Inventario WHERE idInventario NOT IN (SELECT Ventario FROM detalle_vi)")
+		numeros_faltantes = cursor.fetchall()
+
+		# Mostrar los números que faltan y calcular el total
+		if numeros_faltantes:
+			print("Números faltantes en detalle_vi:")
+			for numero in numeros_faltantes:
+				idInventario = numero[0]
+				existencia = numero[1]
+				precio_costo = numero[2]
+				total = existencia * precio_costo
+				cursor.execute(
+					f"INSERT INTO detalle_vi (Ventario, prove, cantidad, total) VALUES ({idInventario}, {ultimo_id_compra}, {existencia}, {total})")
+				self.conn.commit()
+				print(f"Numero {idInventario} agregado a detalle_vi")
+		else:
+			QMessageBox.information(self, "Error", "No hay compras vinculadas")
+			print("No hay números faltantes en detalle_vi.")
+
+			# cursor.execute(f"INSERT INTO detalle_vi (prove) VALUES ({ultimo_id_compra})")
+			# self.conn.commit()
+			# print(f"Se ha insertado el valor de último idCompra en la tabla detalle_vi.")
 

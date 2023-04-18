@@ -1137,6 +1137,36 @@ font: 75 10pt&quot;Times New Roman&quot;;
 }</string>
                         </property>
                        </widget>
+                       <widget class="QPushButton" name="btn_guardar_in_2">
+                        <property name="geometry">
+                         <rect>
+                          <x>580</x>
+                          <y>20</y>
+                          <width>91</width>
+                          <height>23</height>
+                         </rect>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QPushButton{
+border: 2px solid #d2015d;
+border-radius: 8px;
+
+background-color: #fba4c7;
+font: 87 9pt &quot;Arial Black&quot;;
+color: #d2015d;
+}
+QPushButton:hover{
+background-color: white;
+font: 87 10pt &quot;Arial Black&quot;;
+}
+
+
+</string>
+                        </property>
+                        <property name="text">
+                         <string>GUARDAR</string>
+                        </property>
+                       </widget>
                       </widget>
                      </item>
                     </layout>

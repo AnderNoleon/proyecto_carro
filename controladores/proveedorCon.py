@@ -13,13 +13,12 @@ class R_proveedor:
             result = cursor.fetchall()
             return result
 
-    def insertarProveedor(self, empresa, cantidad, precio, codigo, imagen):
+    def insertarProveedor(self, empresa, total):
         print("---Guardando---")
         self.conn = conecciones()
-        id = self.obtener_id()
         with self.conn.cursor() as cursor:
-            sql = """INSERT INTO proveedor (idProveedor, empresa, cantidad, precio, codigo,imagen) VALUES (%s,%s,%s,%s,%s)"""
-            cursor.execute(sql, (id, empresa, cantidad, precio, codigo, imagen))
+            sql = """INSERT INTO Compra (empresa, Total) VALUES (%s,%s)"""
+            cursor.execute(sql, (empresa, total))
             self.conn.commit()
 
     def obtener_id(self):
@@ -33,7 +32,7 @@ class R_proveedor:
     def getProveedor(self, cod):
         self.conn = conecciones()
         with self.conn.cursor() as cursor:
-            sql = "SELECT * FROM proveedor WHERE idProveedor = '"+cod+"'"
+            sql = "SELECT * FROM Compra WHERE idCompra = '"+cod+"'"
             cursor.execute(sql)
             result = cursor.fetchone()
             if result:
