@@ -635,7 +635,7 @@ font: 75 14pt &quot;Palatino Linotype&quot;;
              <number>0</number>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page">
              <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1388,7 +1388,7 @@ font: 75 12pt&quot;Times New Roman&quot;;
                     <string notr="true">background-color: #fba4c7;</string>
                    </property>
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="page_crear_cliente">
                     <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -1403,11 +1403,24 @@ font: 75 12pt&quot;Times New Roman&quot;;
                        <widget class="QLabel" name="label_17">
                         <property name="geometry">
                          <rect>
-                          <x>30</x>
+                          <x>20</x>
                           <y>50</y>
-                          <width>47</width>
-                          <height>13</height>
+                          <width>81</width>
+                          <height>21</height>
                          </rect>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">QLabel {
+border: 2px solid #d2015d;
+border-radius: 8px;
+background-color: #fba4c7;
+font: 87 12pt &quot;Arial Black&quot;;
+color: #d2015d;
+}
+QLabel:hover {
+background-color: white;
+font: 87 12pt &quot;Arial Black&quot;;
+}</string>
                         </property>
                         <property name="text">
                          <string>Nombre</string>
@@ -1568,10 +1581,10 @@ font: 75 10pt&quot;Times New Roman&quot;;
                        <widget class="QLineEdit" name="txt_tipo">
                         <property name="geometry">
                          <rect>
-                          <x>130</x>
-                          <y>210</y>
-                          <width>231</width>
-                          <height>20</height>
+                          <x>140</x>
+                          <y>220</y>
+                          <width>16</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <property name="styleSheet">
@@ -1600,10 +1613,10 @@ font: 75 10pt&quot;Times New Roman&quot;;
                        <widget class="QComboBox" name="cb_tipo">
                         <property name="geometry">
                          <rect>
-                          <x>430</x>
+                          <x>130</x>
                           <y>210</y>
-                          <width>131</width>
-                          <height>22</height>
+                          <width>231</width>
+                          <height>31</height>
                          </rect>
                         </property>
                         <item>

@@ -61,3 +61,4 @@ class ModeloCliente():
             for prod in products:
                 self.cliente.subirCliente(prod[0], prod[1], prod[2], prod[3], prod[4], prod[5])
         self.listar_cliente(tabla)
+

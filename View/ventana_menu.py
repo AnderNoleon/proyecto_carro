@@ -97,6 +97,7 @@ class Main_window(QMainWindow):
 		self.btn_lista_cliente.clicked.connect(lambda: self.modelo_cliente.listar_cliente(self.tabla_cliente))
 		self.btn_eliminar_cliente_2.clicked.connect(lambda: self.modelo_cliente.eliminar_cliente(self.tabla_cliente))
 		self.btn_editar_cliente_2.clicked.connect(lambda: self.modelo_cliente.subir_clientes(self.tabla_cliente))
+		self.cb_tipo.currentIndexChanged.connect(self.actualizar_txt_tipo)
 
 
 		# TODO PARA INVENTARIO
@@ -195,6 +196,7 @@ class Main_window(QMainWindow):
 		self.txt_celular.clear()
 		self.txt_direccion.clear()
 		self.txt_tipo.clear()
+		self.cb_tipo.setCurrentIndex(0)
 
 	def mostrar_compra(self):
 		codigo = self.txt_codigo_in.text()
@@ -508,3 +510,18 @@ class Main_window(QMainWindow):
 			# self.conn.commit()
 			# print(f"Se ha insertado el valor de último idCompra en la tabla detalle_vi.")
 
+	def actualizar_txt_tipo(self, index):
+		# Obtener el texto seleccionado en el ComboBox
+		texto_seleccionado = self.cb_tipo.currentText()
+
+		# Obtener el valor asociado al texto seleccionado
+		valores = {
+			"Cargo Expreso": "1",
+			"Guatex": "2",
+			"Transportador": "3",
+			"Recoger": "4"
+		}
+		valor_seleccionado = valores.get(texto_seleccionado)
+
+		# Actualizar el texto del QLineEdit con el valor seleccionado
+		self.txt_tipo.setText(valor_seleccionado)
