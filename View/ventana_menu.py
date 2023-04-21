@@ -114,6 +114,10 @@ class Main_window(QMainWindow):
 		self.btn_finalizar_in.clicked.connect(lambda: self.modelo_compra.crearProducto(self.txt_marca_pro.text(), self.txt_total_tabla.text()))
 		self.btn_guardar_in_2.clicked.connect(self.detalle)
 
+		# USUARIO BLOQUE LA
+		#self.bt_menu.clicked.connect(self.bloquear_tipo)
+
+
 
 	def control_bt_minimizar(self):
 		self.showMinimized()
@@ -525,3 +529,7 @@ class Main_window(QMainWindow):
 
 		# Actualizar el texto del QLineEdit con el valor seleccionado
 		self.txt_tipo.setText(valor_seleccionado)
+
+
+
+

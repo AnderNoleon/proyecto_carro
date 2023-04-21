@@ -1,42 +1,44 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QLineEdit, QVBoxLayout
+from PyQt5 import uic, QtCore
+from PyQt5.QtWidgets import QMainWindow
+from server.conexion_sql import conecciones
+from View import Main_window, Menu
 import sys
 
-class Example(QWidget):
-    def __init__(self):
-        super().__init__()
 
-        # Crear el ComboBox y el QLineEdit
-        self.cb_tipo = QComboBox()
-        self.cb_tipo.addItems(["Cargo Expreso", "Guatex", "Transportador", "Recoger"])
-        self.txt_tipo = QLineEdit()
+class Main_login(QMainWindow):
+    def __init__(self) -> None:
+        super(Main_login, self).__init__()
+        uic.loadUi("View/loginUi2.ui", self)
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.conn = conecciones()
+        self.ventana_principal = Main_window()
 
-        # Conectar la señal currentIndexChanged al método actualizar_txt_tipo
-        self.cb_tipo.currentIndexChanged.connect(self.actualizar_txt_tipo)
+        # Conectar el botón "Entrar"
+        self.btn_entrar.clicked.connect(self.abrir)
 
-        # Crear el layout y añadir los widgets
-        layout = QVBoxLayout()
-        layout.addWidget(self.cb_tipo)
-        layout.addWidget(self.txt_tipo)
-        self.setLayout(layout)
+    def abrir(self):
+        usuario = self.txt_login.text()
+        contra = self.txt_password.text()
+        cursor = self.conn.cursor()
+        cursor.execute("select * from usuario where usuario='"+usuario+"' and contrasena ='"+contra+"'")
+        result = cursor.fetchone()
 
-    def actualizar_txt_tipo(self, index):
-        # Obtener el texto seleccionado en el ComboBox
-        texto_seleccionado = self.cb_tipo.currentText()
+        if result:
+            # Mostrar la ventana principal
+            self.ventana_principal.show()
+            self.hide()
 
-        # Obtener el valor asociado al texto seleccionado
-        valores = {
-            "Cargo Expreso": "1",
-            "Guatex": "2",
-            "Transportador": "3",
-            "Recoger": "4"
-        }
-        valor_seleccionado = valores.get(texto_seleccionado)
+            # Acceder y actualizar el objeto QLineEdit en menu.ui
+            menu = Menu()
+            menu.txt_admin_menu.setText(usuario)
 
-        # Actualizar el texto del QLineEdit con el valor seleccionado
-        self.txt_tipo.setText(valor_seleccionado)
+        else:
+            print("Contraseña incorrecta")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    ex = Example()
-    ex.show()
+    login = Main_login()
+    login.show()
     sys.exit(app.exec_())
