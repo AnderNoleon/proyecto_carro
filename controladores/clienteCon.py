@@ -39,6 +39,18 @@ class RegistarCliente:
             self.conn.commit()
         print("----Hecho ------")
 
+    def insertarClienteee(self, nombre, nit, celular, direccion, tipo):
+        print("----datos ------")
+        self.conn = conecciones()
+        id = self.obtener_id()
+        with self.conn.cursor() as cursor:
+            if not nit:
+                nit = None
+            sql = """INSERT INTO cliente (idCliente, nombre_cliente, nit, celular, direccion, Tipo_idTipo) VALUES (%s,%s,%s,%s,%s,%s)"""
+            cursor.execute(sql, (id, nombre, nit, celular, direccion, tipo))
+            self.conn.commit()
+        print("----Hecho ------")
+
     def getcliente(self, cod):
         self.conn = conecciones()
         with self.conn.cursor() as cursor:

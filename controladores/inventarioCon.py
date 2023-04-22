@@ -47,19 +47,6 @@ class RegistrarInventario:
             cursor.execute(sql, (codigo, producto, Existencia, precio_costo, precio_venta, id))
             self.conn.commit()
 
-    def guardar_datos(self):
-        nombre = self.nombre.text()
-        edad = self.edad.text()
-
-        if self.row_seleccionada is None:
-            insert_query = "INSERT INTO datos (nombre, edad) VALUES (%s, %s)"
-            data = (nombre, edad)
-            cursor.execute(insert_query, data)
-        else:
-            update_query = "UPDATE datos SET nombre=%s, edad=%s WHERE id=%s"
-            data = (nombre, edad, self.tabla.item(self.row_seleccionada, 0).text())
-            cursor.execute(update_query, data)
-
     def insertarProducto(self, codigo, producto, existencia, precio_costo, precio_venta):
         self.conn = conecciones()
         id = self.obtener_id()

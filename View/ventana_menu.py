@@ -68,6 +68,9 @@ class Main_window(QMainWindow):
 		# ver paginas ---- INVENTARIO
 		self.btn_crear_inventario.clicked.connect(self.page_inventario_c)
 		self.btn_ver_inventario.clicked.connect(self.page_inventario_v)
+		# ver paginas ---- VENTA
+		self.btn_crear_venta.clicked.connect(self.page_ventas_c)
+		self.btn_ver_venta.clicked.connect(self.page_ventas_v)
 
 
 		#self.btn_usuario_ver.clicked.connect
@@ -113,6 +116,7 @@ class Main_window(QMainWindow):
 		self.btn_calcular_pro.clicked.connect(self.ver_total_de_productos)
 		self.btn_finalizar_in.clicked.connect(lambda: self.modelo_compra.crearProducto(self.txt_marca_pro.text(), self.txt_total_tabla.text()))
 		self.btn_guardar_in_2.clicked.connect(self.detalle)
+		self.btn_ver_inventaro_tabla.clicked.connect(lambda: self.modelo_inventario.listar_inventario(self.tabla_pre_venta_3))
 
 		# USUARIO BLOQUE LA
 		#self.bt_menu.clicked.connect(self.bloquear_tipo)
@@ -193,6 +197,12 @@ class Main_window(QMainWindow):
 
 	def page_inventario_c(self):
 		self.stackedWidget_4.setCurrentWidget(self.page_inven_c)
+
+	def page_ventas_c(self):
+		self.stackedWidget_5.setCurrentWidget(self.page_venta_c)
+
+	def page_ventas_v(self):
+		self.stackedWidget_5.setCurrentWidget(self.page_venta_v)
 
 	def borrar_cliente(self):
 		self.txt_nombre_cliente.clear()

@@ -657,7 +657,7 @@ font: 75 14pt &quot;Palatino Linotype&quot;;
                     <string notr="true">background-color: #fba4c7;</string>
                    </property>
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="page_inve_v">
                     <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -669,14 +669,57 @@ font: 75 14pt &quot;Palatino Linotype&quot;;
                        <property name="frameShadow">
                         <enum>QFrame::Raised</enum>
                        </property>
-                       <widget class="QTableWidget" name="tableWidget">
+                       <widget class="QTableWidget" name="tabla_pre_venta_3">
                         <property name="geometry">
                          <rect>
-                          <x>130</x>
+                          <x>50</x>
                           <y>40</y>
-                          <width>256</width>
+                          <width>621</width>
                           <height>192</height>
                          </rect>
+                        </property>
+                        <column>
+                         <property name="text">
+                          <string>id</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>codigo_carro</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>producto</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>existencia</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>precio_costo</string>
+                         </property>
+                        </column>
+                        <column>
+                         <property name="text">
+                          <string>precio_venta</string>
+                         </property>
+                        </column>
+                       </widget>
+                       <widget class="QPushButton" name="btn_ver_inventaro_tabla">
+                        <property name="geometry">
+                         <rect>
+                          <x>120</x>
+                          <y>310</y>
+                          <width>111</width>
+                          <height>23</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Ver</string>
                         </property>
                        </widget>
                       </widget>
@@ -1271,7 +1314,7 @@ font: 87 10pt &quot;Arial Black&quot;;
                       <property name="currentIndex">
                        <number>1</number>
                       </property>
-                      <widget class="QWidget" name="page_inve_v_2">
+                      <widget class="QWidget" name="page_venta_v">
                        <layout class="QHBoxLayout" name="horizontalLayout_12">
                         <item>
                          <widget class="QFrame" name="frame_18">
@@ -1281,21 +1324,24 @@ font: 87 10pt &quot;Arial Black&quot;;
                           <property name="frameShadow">
                            <enum>QFrame::Raised</enum>
                           </property>
-                          <widget class="QTableWidget" name="tableWidget_2">
+                          <widget class="QPushButton" name="pushButton_3">
                            <property name="geometry">
                             <rect>
-                             <x>130</x>
-                             <y>40</y>
-                             <width>256</width>
-                             <height>192</height>
+                             <x>240</x>
+                             <y>140</y>
+                             <width>321</width>
+                             <height>23</height>
                             </rect>
+                           </property>
+                           <property name="text">
+                            <string>ver</string>
                            </property>
                           </widget>
                          </widget>
                         </item>
                        </layout>
                       </widget>
-                      <widget class="QWidget" name="page_inven_c_2">
+                      <widget class="QWidget" name="page_venta_c">
                        <layout class="QHBoxLayout" name="horizontalLayout_13">
                         <item>
                          <widget class="QFrame" name="frame_19">
@@ -1380,7 +1426,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
                             </rect>
                            </property>
                            <property name="text">
-                            <string>CARRO</string>
+                            <string>Cantidad</string>
                            </property>
                           </widget>
                           <widget class="QLabel" name="label_15">
@@ -1393,7 +1439,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
                             </rect>
                            </property>
                            <property name="text">
-                            <string>Cantidad</string>
+                            <string>Total</string>
                            </property>
                           </widget>
                           <widget class="QLabel" name="label_16">
@@ -1824,21 +1870,21 @@ font: 87 10pt &quot;Arial Black&quot;;
                         </widget>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="btn_crear_inventario_2">
+                        <widget class="QPushButton" name="btn_crear_venta">
                          <property name="text">
                           <string>CREAR</string>
                          </property>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="btn_ver_inventario_2">
+                        <widget class="QPushButton" name="btn_ver_venta">
                          <property name="text">
                           <string>VER</string>
                          </property>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="btn_eliminar_cliente_4">
+                        <widget class="QPushButton" name="btn_eliminar_venta">
                          <property name="text">
                           <string>ELIMINAR</string>
                          </property>
