@@ -57,6 +57,8 @@ class Main_login(QMainWindow):
             # Actualizar el objeto QLineEdit en la ventana principal
             self.ventana_principal.txt_admin_menu.setText(usuario)
             self.ventana_principal.txt_tipo_ver.setText(puesto)
+            # corregir para que solo se pueda ver el nombre
+            self.ventana_principal.txt_usuario_venta.setText(usuario)
 
         else:
             QMessageBox.critical(self, "Error de inicio de sesión", "Usuario o contraseña incorrectos")

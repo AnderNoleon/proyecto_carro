@@ -118,8 +118,15 @@ class Main_window(QMainWindow):
 		self.btn_guardar_in_2.clicked.connect(self.detalle)
 		self.btn_ver_inventaro_tabla.clicked.connect(lambda: self.modelo_inventario.listar_inventario(self.tabla_pre_venta_3))
 
-		# USUARIO BLOQUE LA
-		#self.bt_menu.clicked.connect(self.bloquear_tipo)
+		# TODO PARA VENTAS
+		self.tabla_venta.itemSelectionChanged.connect(self.cargar_datos_seleccionados_venta)
+		self.btn_guardar_venta.clicked.connect(self.mostrar_compra_venta)
+		self.btn_calcular_venta.clicked.connect(self.mostrar_codigo_venta)
+		self.btn_editar_venta.clicked.connect(self.editar_datos_venta)
+		self.btn_eliminar_venta_2.clicked.connect(self.eliminar_datos_venta)
+		self.btn_finalizar_venta.clicked.connect(self.finalizado_venta)
+		self.btn_guardar_venta_2.clicked.connect(self.revisar_cliente)
+		self.btn_guardar_venta_3.clicked.connect(self.detalle_venta)
 
 
 
@@ -212,7 +219,7 @@ class Main_window(QMainWindow):
 		self.txt_tipo.clear()
 		self.cb_tipo.setCurrentIndex(0)
 
-	def mostrar_compra(self):
+	def mostrar_coampra(self):
 		codigo = self.txt_codigo_in.text()
 		carro = self.txt_carro_in.text()
 		cantidad = self.txt_cantidad_in.text()
@@ -240,7 +247,7 @@ class Main_window(QMainWindow):
 		self.row_seleccionada = None
 
 	# cambiar por el que esta arriba , esta mas completo
-	def mostrar_compraa(self):
+	def mostrar_compra(self):
 		codigo = self.txt_codigo_in.text()
 		carro = self.txt_carro_in.text()
 		cantidad = self.txt_cantidad_in.text()
@@ -284,7 +291,6 @@ class Main_window(QMainWindow):
 			QMessageBox.information(self, "Error", "Por favor seleccione una fila para editar.")
 			print("error")
 			return
-
 		self.mostrar_compra()
 
 	def eliminar_datos(self):
@@ -539,6 +545,204 @@ class Main_window(QMainWindow):
 
 		# Actualizar el texto del QLineEdit con el valor seleccionado
 		self.txt_tipo.setText(valor_seleccionado)
+
+	# venta
+	def mostrar_compra_venta(self):
+		codigo = self.txt_codigo_venta.text()
+		cantidad = self.txt_carro_venta.text()
+		# fecha = self.txt_fecha.text()
+		total = self.txt_total_Venta.text()
+		usuario = self.txt_usuario_venta.text()
+		cliente = self.txt_cliente_venta.text()
+
+		if self.row_seleccionada is None:
+			row_position = self.tabla_venta.rowCount()
+			self.tabla_venta.insertRow(row_position)
+		else:
+			row_position = self.row_seleccionada
+
+		self.tabla_venta.setItem(row_position, 0, QTableWidgetItem(codigo))
+		self.tabla_venta.setItem(row_position, 1, QTableWidgetItem(cantidad))
+		self.tabla_venta.setItem(row_position, 2, QTableWidgetItem(total))
+		# self.tabla_venta.setItem(row_position, 3, QTableWidgetItem(fecha))
+		# self.tabla_venta.setItem(row_position, 3, QTableWidgetItem(usuario))
+		# self.tabla_venta.setItem(row_position, 4, QTableWidgetItem(cliente))
+
+		self.txt_codigo_venta.clear()
+		self.txt_carro_venta.clear()
+		# self.txt_fecha.clear()
+		self.txt_total_Venta.clear()
+		# self.txt_usuario_venta.clear()
+		# self.txt_cliente_venta.clear()
+		self.txt_precio_venta_v.clear()
+
+		self.row_seleccionada = None
+
+	def editar_datos_venta(self):
+		if self.row_seleccionada is None:
+			QMessageBox.information(self, "Error", "Por favor seleccione una fila para editar.")
+			print("error")
+			return
+		self.mostrar_compra_venta()
+
+	def cargar_datos_seleccionados_venta(self):
+		if len(self.tabla_venta.selectedItems()) > 0:
+			items = self.tabla_venta.selectedItems()
+			self.row_seleccionada = items[0].row()
+			self.txt_codigo_venta.setText(self.tabla_venta.item(self.row_seleccionada, 0).text())
+			self.txt_carro_venta.setText(self.tabla_venta.item(self.row_seleccionada, 1).text())
+			self.txt_total_Venta.setText(self.tabla_venta.item(self.row_seleccionada, 2).text())
+			# self.txt_fecha.setText(self.tabla_venta.item(self.row_seleccionada, 3).text())
+			# self.txt_cliente_venta.setText(self.tabla_venta.item(self.row_seleccionada, 4).text())
+
+	def eliminar_datos_venta(self):
+		if self.row_seleccionada is None:
+			QMessageBox.information(self, "Error", "Por favor seleccione una fila para eliminar.")
+			return
+
+		reply = QMessageBox.question(self, 'Eliminar fila', '¿Está seguro de que desea eliminar esta fila?',
+									 QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+		if reply == QMessageBox.Yes:
+			self.tabla_venta.removeRow(self.row_seleccionada)
+			self.txt_codigo_venta.clear()
+			self.txt_carro_venta.clear()
+			# self.txt_fecha.clear()
+			self.txt_total_Venta.clear()
+			# self.txt_cliente_venta.clear()
+			self.txt_precio_venta_v.clear()
+			self.row_seleccionada = None
+
+	def mostrar_codigo_venta(self):
+		try:
+			# Obtener la cantidad y el código del carro del QLineEdit correspondiente
+			codigo = self.txt_codigo_venta.text()
+			cantidad = int(self.txt_carro_venta.text())
+			print(f"Código del carro: {codigo}, Cantidad: {cantidad}")
+
+			# Conectarse a la base de datos y obtener la cantidad de existencias y precio de venta del carro seleccion
+			self.conn = conecciones()
+			with self.conn.cursor() as cursor:
+				sql = "SELECT existencia, precio_venta FROM Inventario WHERE codigo_carro = %s"
+				cursor.execute(sql, (codigo,))
+				result = cursor.fetchone()
+
+			if result is not None:
+				existencia, precio = result
+				print(f"Existencia: {existencia}, Precio de venta: {precio}")
+				self.txt_precio_venta_v.setText(str(precio))
+
+				# Verificar si la cantidad solicitada es mayor a la cantidad en existencia
+				if cantidad > existencia:
+					# Mostrar un mensaje con la cantidad de existencias disponibles
+					mensaje = QMessageBox()
+					mensaje.setIcon(QMessageBox.Warning)
+					mensaje.setWindowTitle('Error de inventario')
+					mensaje.setText(f'Solo hay {existencia} unidades disponibles en inventario.')
+					mensaje.exec_()
+				else:
+					# Realizar la multiplicación y mostrar el resultado en el QLineEdit correspondiente
+					total = precio * cantidad
+					self.txt_total_Venta.setText(str(total))
+			else:
+				mensaje = QMessageBox()
+				mensaje.setIcon(QMessageBox.Warning)
+				mensaje.setWindowTitle('Código no encontrado')
+				mensaje.setText(f'El código {codigo} no existe en la base de datos.')
+				mensaje.exec_()
+			# Cerrar la conexión con la base de datos
+			print("Cerrando la conexión a la base de datos...")
+			self.conn.close()
+		except Exception as e:
+			print(f"Error: {e}")
+
+	def finalizado_venta(self):
+		# Establecer la conexión una vez
+		self.conn = conecciones()
+		cursor = self.conn.cursor()
+
+		# Obtener el id del usuario
+		usuario = self.txt_usuario_venta.text()
+		cursor.execute("SELECT idUsuario FROM Usuario WHERE usuario = %s", (usuario,))
+		result = cursor.fetchall()
+		if result:
+			id_usuario = result[0][0]
+			print("El id del usuario", usuario, "es:", id_usuario)
+		else:
+			print("No se encontró el usuario:", usuario)
+			return
+
+		# Obtener el id del cliente
+		cliente = self.txt_cliente_venta.text()
+		cursor.execute("SELECT idCliente FROM Cliente WHERE nombre_cliente = %s", (cliente,))
+		result = cursor.fetchall()
+		if result:
+			id_cliente = result[0][0]
+			print("El id del cliente", cliente, "es:", id_cliente)
+		else:
+			print("No se encontró el cliente:", cliente)
+			return
+
+		# Calcular los totales
+		total_cantidad = 0
+		total_venta = 0
+		for row in range(self.tabla_venta.rowCount()):
+			cantidad = int(self.tabla_venta.item(row, 1).text())
+			total_cantidad += cantidad
+			total = float(self.tabla_venta.item(row, 2).text())
+			total_venta += total
+		print(f" cantidad {total_cantidad} +  fecha NULL +total {total_venta} +  usuario {id_usuario}  cliente + {id_cliente} ")
+		datos = []
+		datos.append((total_cantidad, None, total_venta, id_usuario, id_cliente))
+		insert_query = """INSERT INTO Venta (cantidad, fecha,Total,Usuario_id,Cliente_id) 
+			                            VALUES (%s, %s, %s, %s, %s)"""
+		cursor.executemany(insert_query, datos)
+		self.conn.commit()
+
+		# Cerrar la conexión después del bucle
+		cursor.close()
+		self.conn.close()
+
+		self.limpiar_campos_venta()
+
+	def limpiar_campos_venta(self):
+		self.tabla_venta.clearContents()
+
+	def revisar_cliente(self):
+		try:
+			self.conn = conecciones()
+			cursor = self.conn.cursor()
+			nombre_cliente = self.txt_cliente_venta.text()
+			cursor.execute("SELECT nombre_cliente FROM Cliente WHERE nombre_cliente = %s", (nombre_cliente,))
+
+			# Recuperar resultados
+			resultados = cursor.fetchall()
+
+			# Cerrar cursor y conexión
+
+			# Mostrar alerta si el cliente no está en la base de datos
+			if len(resultados) == 0:
+				QMessageBox.critical(None, "Error", "El cliente no está en la base de datos")
+			else:
+				QMessageBox.information(None, "Cliente encontrado", "El cliente está en la base de datos")
+
+			cursor.close()
+			self.conn.close()
+
+		except Exception as e:
+			QMessageBox.critical(None, "Error", "Error al acceder a la base de datos: " + str(e))
+
+	def detalle_venta(self):
+		self.conn = conecciones()
+		cursor = self.conn.cursor()
+
+		# Obtener el último idCompra en la tabla Compra
+		cursor.execute("SELECT MAX(idVenta) FROM Venta")
+		ultimo_id_venta = cursor.fetchone()[0]
+
+		# Mostrar resulta
+		print(f"Último idVenta: {ultimo_id_venta +1}")
+
+
 
 
 

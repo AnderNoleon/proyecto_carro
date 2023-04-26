@@ -657,7 +657,7 @@ font: 75 14pt &quot;Palatino Linotype&quot;;
                     <string notr="true">background-color: #fba4c7;</string>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="page_inve_v">
                     <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -1354,10 +1354,10 @@ font: 87 10pt &quot;Arial Black&quot;;
                           <property name="frameShadow">
                            <enum>QFrame::Raised</enum>
                           </property>
-                          <widget class="QPushButton" name="btn_guardar_in_3">
+                          <widget class="QPushButton" name="btn_guardar_venta">
                            <property name="geometry">
                             <rect>
-                             <x>450</x>
+                             <x>420</x>
                              <y>20</y>
                              <width>91</width>
                              <height>23</height>
@@ -1384,7 +1384,7 @@ font: 87 10pt &quot;Arial Black&quot;;
                             <string>GUARDAR</string>
                            </property>
                           </widget>
-                          <widget class="QLineEdit" name="txt_codigo_in_2">
+                          <widget class="QLineEdit" name="txt_codigo_venta">
                            <property name="geometry">
                             <rect>
                              <x>140</x>
@@ -1433,7 +1433,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
                            <property name="geometry">
                             <rect>
                              <x>10</x>
-                             <y>120</y>
+                             <y>170</y>
                              <width>101</width>
                              <height>16</height>
                             </rect>
@@ -1442,33 +1442,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
                             <string>Total</string>
                            </property>
                           </widget>
-                          <widget class="QLabel" name="label_16">
-                           <property name="geometry">
-                            <rect>
-                             <x>10</x>
-                             <y>160</y>
-                             <width>101</width>
-                             <height>16</height>
-                            </rect>
-                           </property>
-                           <property name="text">
-                            <string>Precio Costo</string>
-                           </property>
-                          </widget>
-                          <widget class="QLabel" name="label_22">
-                           <property name="geometry">
-                            <rect>
-                             <x>10</x>
-                             <y>200</y>
-                             <width>101</width>
-                             <height>16</height>
-                            </rect>
-                           </property>
-                           <property name="text">
-                            <string>Precio Venta</string>
-                           </property>
-                          </widget>
-                          <widget class="QLineEdit" name="txt_carro_in_2">
+                          <widget class="QLineEdit" name="txt_carro_venta">
                            <property name="geometry">
                             <rect>
                              <x>140</x>
@@ -1487,26 +1461,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
 }</string>
                            </property>
                           </widget>
-                          <widget class="QLineEdit" name="txt_cantidad_in_2">
-                           <property name="geometry">
-                            <rect>
-                             <x>140</x>
-                             <y>120</y>
-                             <width>261</width>
-                             <height>20</height>
-                            </rect>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">QLineEdit{
-border: 2px solid #bc0b5b;
-border-radius: 6px;
-color: rgb(210, 1, 93);
-background-color:rgb(251, 164, 199);
-font: 75 10pt&quot;Times New Roman&quot;;
-}</string>
-                           </property>
-                          </widget>
-                          <widget class="QLineEdit" name="txt_pc_in_2">
+                          <widget class="QLineEdit" name="txt_total_Venta">
                            <property name="geometry">
                             <rect>
                              <x>140</x>
@@ -1525,44 +1480,25 @@ font: 75 10pt&quot;Times New Roman&quot;;
 }</string>
                            </property>
                           </widget>
-                          <widget class="QLineEdit" name="txt_pv_in_2">
-                           <property name="geometry">
-                            <rect>
-                             <x>140</x>
-                             <y>200</y>
-                             <width>261</width>
-                             <height>20</height>
-                            </rect>
-                           </property>
-                           <property name="styleSheet">
-                            <string notr="true">QLineEdit{
-border: 2px solid #bc0b5b;
-border-radius: 6px;
-color: rgb(210, 1, 93);
-background-color:rgb(251, 164, 199);
-font: 75 10pt&quot;Times New Roman&quot;;
-}</string>
-                           </property>
-                          </widget>
                           <widget class="QLabel" name="label_23">
                            <property name="geometry">
                             <rect>
-                             <x>500</x>
-                             <y>80</y>
+                             <x>430</x>
+                             <y>110</y>
                              <width>101</width>
                              <height>16</height>
                             </rect>
                            </property>
                            <property name="text">
-                            <string>MARCA</string>
+                            <string>Cliente</string>
                            </property>
                           </widget>
-                          <widget class="QLineEdit" name="txt_marca_pro_2">
+                          <widget class="QLineEdit" name="txt_cliente_venta">
                            <property name="geometry">
                             <rect>
-                             <x>610</x>
-                             <y>80</y>
-                             <width>113</width>
+                             <x>520</x>
+                             <y>110</y>
+                             <width>201</width>
                              <height>20</height>
                             </rect>
                            </property>
@@ -1579,22 +1515,22 @@ font: 75 10pt&quot;Times New Roman&quot;;
                           <widget class="QLabel" name="label_24">
                            <property name="geometry">
                             <rect>
-                             <x>500</x>
-                             <y>110</y>
+                             <x>430</x>
+                             <y>70</y>
                              <width>101</width>
                              <height>16</height>
                             </rect>
                            </property>
                            <property name="text">
-                            <string>Sub_total</string>
+                            <string>Usuario</string>
                            </property>
                           </widget>
-                          <widget class="QLineEdit" name="txt_total_pro_2">
+                          <widget class="QLineEdit" name="txt_precio_venta_v">
                            <property name="geometry">
                             <rect>
-                             <x>610</x>
-                             <y>110</y>
-                             <width>113</width>
+                             <x>140</x>
+                             <y>120</y>
+                             <width>261</width>
                              <height>20</height>
                             </rect>
                            </property>
@@ -1608,7 +1544,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
 }</string>
                            </property>
                           </widget>
-                          <widget class="QPushButton" name="btn_calcular_pro_2">
+                          <widget class="QPushButton" name="btn_calcular_venta">
                            <property name="geometry">
                             <rect>
                              <x>10</x>
@@ -1638,12 +1574,12 @@ font: 87 10pt &quot;Arial Black&quot;;
                             <string>CALCULAR</string>
                            </property>
                           </widget>
-                          <widget class="QTableWidget" name="tabla_pre_venta_2">
+                          <widget class="QTableWidget" name="tabla_venta">
                            <property name="geometry">
                             <rect>
-                             <x>130</x>
-                             <y>230</y>
-                             <width>621</width>
+                             <x>440</x>
+                             <y>160</y>
+                             <width>301</width>
                              <height>192</height>
                             </rect>
                            </property>
@@ -1654,26 +1590,16 @@ font: 87 10pt &quot;Arial Black&quot;;
                            </column>
                            <column>
                             <property name="text">
-                             <string>producto</string>
+                             <string>Cantidad</string>
                             </property>
                            </column>
                            <column>
                             <property name="text">
-                             <string>existencia</string>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>precio_costo</string>
-                            </property>
-                           </column>
-                           <column>
-                            <property name="text">
-                             <string>precio_venta</string>
+                             <string>Total</string>
                             </property>
                            </column>
                           </widget>
-                          <widget class="QPushButton" name="btn_finalizar_in_2">
+                          <widget class="QPushButton" name="btn_finalizar_venta">
                            <property name="geometry">
                             <rect>
                              <x>10</x>
@@ -1703,7 +1629,7 @@ font: 87 10pt &quot;Arial Black&quot;;
                             <string>COMPRADO</string>
                            </property>
                           </widget>
-                          <widget class="QPushButton" name="btn_eliminar_in_2">
+                          <widget class="QPushButton" name="btn_eliminar_venta_2">
                            <property name="geometry">
                             <rect>
                              <x>10</x>
@@ -1733,7 +1659,7 @@ font: 87 10pt &quot;Arial Black&quot;;
                             <string>ELIMINAR</string>
                            </property>
                           </widget>
-                          <widget class="QPushButton" name="btn_editar_in_2">
+                          <widget class="QPushButton" name="btn_editar_venta">
                            <property name="geometry">
                             <rect>
                              <x>10</x>
@@ -1766,22 +1692,22 @@ font: 87 10pt &quot;Arial Black&quot;;
                           <widget class="QLabel" name="label_25">
                            <property name="geometry">
                             <rect>
-                             <x>500</x>
-                             <y>140</y>
+                             <x>10</x>
+                             <y>120</y>
                              <width>101</width>
                              <height>16</height>
                             </rect>
                            </property>
                            <property name="text">
-                            <string>Total</string>
+                            <string>Precio Venta</string>
                            </property>
                           </widget>
-                          <widget class="QLineEdit" name="txt_total_tabla_2">
+                          <widget class="QLineEdit" name="txt_usuario_venta">
                            <property name="geometry">
                             <rect>
-                             <x>610</x>
-                             <y>140</y>
-                             <width>113</width>
+                             <x>520</x>
+                             <y>70</y>
+                             <width>191</width>
                              <height>20</height>
                             </rect>
                            </property>
@@ -1795,10 +1721,10 @@ font: 75 10pt&quot;Times New Roman&quot;;
 }</string>
                            </property>
                           </widget>
-                          <widget class="QPushButton" name="btn_guardar_in_4">
+                          <widget class="QPushButton" name="btn_guardar_venta_2">
                            <property name="geometry">
                             <rect>
-                             <x>580</x>
+                             <x>520</x>
                              <y>20</y>
                              <width>91</width>
                              <height>23</height>
@@ -1822,7 +1748,37 @@ font: 87 10pt &quot;Arial Black&quot;;
 </string>
                            </property>
                            <property name="text">
-                            <string>GUARDAR</string>
+                            <string>Ok</string>
+                           </property>
+                          </widget>
+                          <widget class="QPushButton" name="btn_guardar_venta_3">
+                           <property name="geometry">
+                            <rect>
+                             <x>620</x>
+                             <y>20</y>
+                             <width>91</width>
+                             <height>23</height>
+                            </rect>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">QPushButton{
+border: 2px solid #d2015d;
+border-radius: 8px;
+
+background-color: #fba4c7;
+font: 87 9pt &quot;Arial Black&quot;;
+color: #d2015d;
+}
+QPushButton:hover{
+background-color: white;
+font: 87 10pt &quot;Arial Black&quot;;
+}
+
+
+</string>
+                           </property>
+                           <property name="text">
+                            <string>Ok</string>
                            </property>
                           </widget>
                          </widget>
@@ -2527,7 +2483,7 @@ font: 87 12pt &quot;Arial Black&quot;;
                     <string notr="true">background-color: rgb(251, 164, 199);</string>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="page_editar_usuario">
                     <layout class="QVBoxLayout" name="verticalLayout_11">
