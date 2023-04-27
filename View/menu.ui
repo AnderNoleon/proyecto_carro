@@ -1748,7 +1748,7 @@ font: 87 10pt &quot;Arial Black&quot;;
 </string>
                            </property>
                            <property name="text">
-                            <string>Ok</string>
+                            <string>DETALLE</string>
                            </property>
                           </widget>
                           <widget class="QPushButton" name="btn_guardar_venta_3">
@@ -1780,6 +1780,31 @@ font: 87 10pt &quot;Arial Black&quot;;
                            <property name="text">
                             <string>Ok</string>
                            </property>
+                          </widget>
+                          <widget class="QTableWidget" name="tabla_venta_detalle">
+                           <property name="geometry">
+                            <rect>
+                             <x>130</x>
+                             <y>200</y>
+                             <width>301</width>
+                             <height>192</height>
+                            </rect>
+                           </property>
+                           <column>
+                            <property name="text">
+                             <string>codigo_carro</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Cantidad</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Total</string>
+                            </property>
+                           </column>
                           </widget>
                          </widget>
                         </item>

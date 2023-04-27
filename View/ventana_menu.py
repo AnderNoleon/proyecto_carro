@@ -124,10 +124,11 @@ class Main_window(QMainWindow):
 		self.btn_calcular_venta.clicked.connect(self.mostrar_codigo_venta)
 		self.btn_editar_venta.clicked.connect(self.editar_datos_venta)
 		self.btn_eliminar_venta_2.clicked.connect(self.eliminar_datos_venta)
+		self.btn_finalizar_venta.clicked.connect(self.pasar_datos_tabla)
 		self.btn_finalizar_venta.clicked.connect(self.finalizado_venta)
-		self.btn_guardar_venta_2.clicked.connect(self.revisar_cliente)
-		self.btn_guardar_venta_3.clicked.connect(self.detalle_venta)
-
+		# self.btn_guardar_venta_2.clicked.connect(self.revisar_cliente)
+		self.btn_guardar_venta_2.clicked.connect(self.detalle_venta)
+		# correcto self.btn_finalizar_venta.clicked.connect(self.pasar_datos_tabla)
 
 
 	def control_bt_minimizar(self):
@@ -731,7 +732,7 @@ class Main_window(QMainWindow):
 		except Exception as e:
 			QMessageBox.critical(None, "Error", "Error al acceder a la base de datos: " + str(e))
 
-	def detalle_venta(self):
+	def detalle_ventaaa(self):
 		self.conn = conecciones()
 		cursor = self.conn.cursor()
 
@@ -740,10 +741,99 @@ class Main_window(QMainWindow):
 		ultimo_id_venta = cursor.fetchone()[0]
 
 		# Mostrar resulta
-		print(f"Último idVenta: {ultimo_id_venta +1}")
+		print(f"Último idVenta: {ultimo_id_venta}")
 
+	def pasar_datos_tabla(self):
+		datos = []
+		for fila in range(self.tabla_venta.rowCount()):
+			fila_datos = []
+			for columna in range(self.tabla_venta.columnCount()):
+				item = self.tabla_venta.item(fila, columna)
+				fila_datos.append(item.text())
+			datos.append(fila_datos)
 
+		# Limpiar la segunda QTableWidget
+		self.tabla_venta_detalle.clear()
 
+		# Configurar las columnas y filas en la segunda QTableWidget
+		self.tabla_venta_detalle.setColumnCount(len(datos[0]))
+		self.tabla_venta_detalle.setRowCount(len(datos))
+
+		# Copiar los nombres de las columnas de la primera QTableWidget a la segunda
+		for columna in range(self.tabla_venta.columnCount()):
+			nombre_columna = self.tabla_venta.horizontalHeaderItem(columna).text()
+			self.tabla_venta_detalle.setHorizontalHeaderItem(columna, QtWidgets.QTableWidgetItem(nombre_columna))
+
+		# Insertar los datos en la segunda QTableWidget
+		for fila, fila_datos in enumerate(datos):
+			for columna, dato in enumerate(fila_datos):
+				item = QtWidgets.QTableWidgetItem(str(dato))
+				self.tabla_venta_detalle.setItem(fila, columna, item)
+
+	def detalle_venta2(self):
+		try:
+			self.conn = conecciones()
+			cursor = self.conn.cursor()
+
+			# Obtener el último idVenta en la tabla Venta
+			cursor.execute("SELECT MAX(idVenta) FROM Venta")
+			ultimo_id_venta = cursor.fetchone()[0]
+
+			# Mostrar detalle de venta
+			for fila in range(self.tabla_venta_detalle.rowCount()):
+				codigo_carro = self.tabla_venta_detalle.item(fila, 0).text()
+				consulta = """
+	                SELECT idInventario
+	                FROM Inventario
+	                WHERE codigo_carro = %s
+	            """
+				cursor.execute(consulta, (codigo_carro,))
+				idInventario = cursor.fetchone()[0]
+				cantidad = self.tabla_venta_detalle.item(fila, 1).text()
+				precio = self.tabla_venta_detalle.item(fila, 2).text()
+				# print(f"Código de carro: {codigo_carro}, Precio: {precio}, Cantidad: {cantidad}, IdInventario: {idInventario}, IdVenta: {ultimo_id_venta}")
+				print(f" IdVenta: {ultimo_id_venta}, IdInventario: {idInventario}, Código de carro: {codigo_carro},Cantidad: {cantidad} , Precio: {precio}")
+
+		except Exception as e:
+			print(f"Ocurrió un error: {e}")
+
+	def detalle_venta(self):
+		try:
+			self.conn = conecciones()
+			cursor = self.conn.cursor()
+
+			# Obtener el último idVenta en la tabla Venta
+			cursor.execute("SELECT MAX(idVenta) FROM Venta")
+			ultimo_id_venta = cursor.fetchone()[0]
+
+			# Mostrar detalle de venta
+			for fila in range(self.tabla_venta_detalle.rowCount()):
+				codigo_carro = self.tabla_venta_detalle.item(fila, 0).text()
+				consulta = """
+	                SELECT idInventario
+	                FROM Inventario
+	                WHERE codigo_carro = %s
+	            """
+				cursor.execute(consulta, (codigo_carro,))
+				idInventario = cursor.fetchone()[0]
+				cantidad = self.tabla_venta_detalle.item(fila, 1).text()
+				precio = self.tabla_venta_detalle.item(fila, 2).text()
+
+				# Insertar detalle de venta en tabla detalle_venta
+				consulta = """
+	                INSERT INTO detalle_venta (venta_id, inventario_id, codigo, cantidad, sub_total)
+	                VALUES (%s, %s, %s, %s, %s)
+	            """
+				sub_total = 1 * float(precio)
+				valores = (ultimo_id_venta, idInventario, codigo_carro, cantidad, sub_total)
+				cursor.execute(consulta, valores)
+				self.conn.commit()
+
+				print(
+					f" IdVenta: {ultimo_id_venta}, IdInventario: {idInventario}, Código de carro: {codigo_carro}, Cantidad: {cantidad}, Precio: {precio}")
+
+		except Exception as e:
+			print(f"Ocurrió un error: {e}")
 
 
 
