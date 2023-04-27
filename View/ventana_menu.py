@@ -57,7 +57,7 @@ class Main_window(QMainWindow):
 		self.bt_dos.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_dos))
 		self.bt_tres.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_tres))
 		self.bt_cuatro.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cuatro))
-		self.bt_cinco.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cinco))
+		# self.bt_cinco.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cinco))
 
 		# ver paginas-----
 		self.btn_usuario_editar.clicked.connect(self.page_usuario)
@@ -126,7 +126,7 @@ class Main_window(QMainWindow):
 		self.btn_eliminar_venta_2.clicked.connect(self.eliminar_datos_venta)
 		self.btn_finalizar_venta.clicked.connect(self.pasar_datos_tabla)
 		self.btn_finalizar_venta.clicked.connect(self.finalizado_venta)
-		# self.btn_guardar_venta_2.clicked.connect(self.revisar_cliente)
+		self.btn_revisar_cliente.clicked.connect(self.revisar_cliente)
 		self.btn_guardar_venta_2.clicked.connect(self.detalle_venta)
 		# correcto self.btn_finalizar_venta.clicked.connect(self.pasar_datos_tabla)
 
@@ -732,17 +732,6 @@ class Main_window(QMainWindow):
 		except Exception as e:
 			QMessageBox.critical(None, "Error", "Error al acceder a la base de datos: " + str(e))
 
-	def detalle_ventaaa(self):
-		self.conn = conecciones()
-		cursor = self.conn.cursor()
-
-		# Obtener el último idCompra en la tabla Compra
-		cursor.execute("SELECT MAX(idVenta) FROM Venta")
-		ultimo_id_venta = cursor.fetchone()[0]
-
-		# Mostrar resulta
-		print(f"Último idVenta: {ultimo_id_venta}")
-
 	def pasar_datos_tabla(self):
 		datos = []
 		for fila in range(self.tabla_venta.rowCount()):
@@ -769,33 +758,6 @@ class Main_window(QMainWindow):
 			for columna, dato in enumerate(fila_datos):
 				item = QtWidgets.QTableWidgetItem(str(dato))
 				self.tabla_venta_detalle.setItem(fila, columna, item)
-
-	def detalle_venta2(self):
-		try:
-			self.conn = conecciones()
-			cursor = self.conn.cursor()
-
-			# Obtener el último idVenta en la tabla Venta
-			cursor.execute("SELECT MAX(idVenta) FROM Venta")
-			ultimo_id_venta = cursor.fetchone()[0]
-
-			# Mostrar detalle de venta
-			for fila in range(self.tabla_venta_detalle.rowCount()):
-				codigo_carro = self.tabla_venta_detalle.item(fila, 0).text()
-				consulta = """
-	                SELECT idInventario
-	                FROM Inventario
-	                WHERE codigo_carro = %s
-	            """
-				cursor.execute(consulta, (codigo_carro,))
-				idInventario = cursor.fetchone()[0]
-				cantidad = self.tabla_venta_detalle.item(fila, 1).text()
-				precio = self.tabla_venta_detalle.item(fila, 2).text()
-				# print(f"Código de carro: {codigo_carro}, Precio: {precio}, Cantidad: {cantidad}, IdInventario: {idInventario}, IdVenta: {ultimo_id_venta}")
-				print(f" IdVenta: {ultimo_id_venta}, IdInventario: {idInventario}, Código de carro: {codigo_carro},Cantidad: {cantidad} , Precio: {precio}")
-
-		except Exception as e:
-			print(f"Ocurrió un error: {e}")
 
 	def detalle_venta(self):
 		try:
