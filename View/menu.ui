@@ -583,7 +583,7 @@ font: 75 14pt &quot;Palatino Linotype&quot;;
              <number>0</number>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="page">
              <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1327,28 +1327,6 @@ QPushButton:hover{
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QPushButton" name="btn_eliminar_cliente_3">
-                      <property name="styleSheet">
-                       <string notr="true">QPushButton{
-    border: 2px solid #d2015d;
-    border-radius: 6px;
-    background-color: #fba4c7;
-    font: 60 10pt &quot;Arial Black&quot;;
-    color: #d2015d;
-    min-width: 100px;
-}
-QPushButton:hover{
-    background-color: white;
-    font: 70 10pt &quot;Arial Black&quot;;
-}
-</string>
-                      </property>
-                      <property name="text">
-                       <string>ELIMINAR</string>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
                   </widget>
                  </item>
@@ -1386,7 +1364,7 @@ QPushButton:hover{
                        <string notr="true">background-color: #fba4c7;</string>
                       </property>
                       <property name="currentIndex">
-                       <number>1</number>
+                       <number>0</number>
                       </property>
                       <widget class="QWidget" name="page_venta_v">
                        <layout class="QHBoxLayout" name="horizontalLayout_12">
@@ -1429,6 +1407,9 @@ font: 87 10pt &quot;Arial Black&quot;;
                            </property>
                           </widget>
                           <widget class="QTableWidget" name="tabla_factura">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
                            <property name="geometry">
                             <rect>
                              <x>20</x>
@@ -1464,6 +1445,9 @@ font: 87 10pt &quot;Arial Black&quot;;
                            </column>
                           </widget>
                           <widget class="QTableWidget" name="tabla_factura_2">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
                            <property name="geometry">
                             <rect>
                              <x>20</x>
@@ -3245,7 +3229,7 @@ QPushButton:hover{
                      </property>
                      <property name="geometry">
                       <rect>
-                       <x>310</x>
+                       <x>340</x>
                        <y>130</y>
                        <width>231</width>
                        <height>20</height>
@@ -3267,7 +3251,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
                      </property>
                      <property name="geometry">
                       <rect>
-                       <x>60</x>
+                       <x>70</x>
                        <y>130</y>
                        <width>231</width>
                        <height>20</height>
@@ -3286,7 +3270,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
                     <widget class="QLabel" name="label_28">
                      <property name="geometry">
                       <rect>
-                       <x>200</x>
+                       <x>240</x>
                        <y>40</y>
                        <width>391</width>
                        <height>51</height>
