@@ -65,7 +65,7 @@ border-radius:10px;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(85, 98, 112, 255), stop:1 rgba(255, 107, 107, 255));
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(188,11, 91, 255), stop:1 rgba(255, 107, 107, 255));
 border-radius:10px;</string>
     </property>
     <property name="text">
@@ -234,6 +234,25 @@ padding-bottom:7px;</string>
     </property>
     <property name="text">
      <string>Cars 1/64</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>130</y>
+      <width>211</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap>../imagenes/por.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

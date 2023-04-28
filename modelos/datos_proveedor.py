@@ -14,3 +14,4 @@ class ModeloPrincipal():
         if empresa and total:
             print("mandando datos")
             self.producto. insertarProveedor(empresa, total)
+            QMessageBox.information(None, "HECHO", "Se completo la accion")

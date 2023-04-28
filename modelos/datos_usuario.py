@@ -20,12 +20,6 @@ class ModeloUsuario():
             for column_number, data in enumerate(row_data):
                 table.setItem(row_number, column_number, QtWidgets.QTableWidgetItem(str(data)))
 
-    def crearUsuarioo(self, usuario, contrasena, nombre, apellido, puesto):
-        self.usuario = RegistrarUsuario()
-        if usuario and contrasena and nombre and apellido and puesto:
-            print("-DATOS ENVIANDOS---")
-            self.usuario.insertarUsuario(usuario, contrasena ,nombre, apellido, puesto)
-
     def eliminar_Usuario(self, table):
         self.usuario = RegistrarUsuario()
         table = table

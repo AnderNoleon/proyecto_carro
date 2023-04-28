@@ -504,32 +504,6 @@ font: 75 14pt &quot;Palatino Linotype&quot;;
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="bt_cuatro">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: #d2015d;</string>
-            </property>
-            <property name="text">
-             <string>Seguridad</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>encriptado.png</normaloff>encriptado.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -609,7 +583,7 @@ font: 75 14pt &quot;Palatino Linotype&quot;;
              <number>0</number>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="page">
              <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -647,9 +621,9 @@ font: 75 14pt &quot;Palatino Linotype&quot;;
                         <property name="geometry">
                          <rect>
                           <x>10</x>
-                          <y>150</y>
+                          <y>60</y>
                           <width>621</width>
-                          <height>192</height>
+                          <height>361</height>
                          </rect>
                         </property>
                         <column>
@@ -1424,17 +1398,111 @@ QPushButton:hover{
                           <property name="frameShadow">
                            <enum>QFrame::Raised</enum>
                           </property>
-                          <widget class="QPushButton" name="pushButton_3">
+                          <widget class="QPushButton" name="btn_ver_factura">
                            <property name="geometry">
                             <rect>
-                             <x>240</x>
-                             <y>140</y>
-                             <width>321</width>
+                             <x>560</x>
+                             <y>90</y>
+                             <width>161</width>
                              <height>23</height>
                             </rect>
                            </property>
+                           <property name="styleSheet">
+                            <string notr="true">QPushButton{
+border: 2px solid #d2015d;
+border-radius: 8px;
+
+background-color: #fba4c7;
+font: 87 9pt &quot;Arial Black&quot;;
+color: #d2015d;
+}
+QPushButton:hover{
+background-color: white;
+font: 87 10pt &quot;Arial Black&quot;;
+}
+
+
+</string>
+                           </property>
                            <property name="text">
                             <string>ver</string>
+                           </property>
+                          </widget>
+                          <widget class="QTableWidget" name="tabla_factura">
+                           <property name="geometry">
+                            <rect>
+                             <x>20</x>
+                             <y>90</y>
+                             <width>531</width>
+                             <height>71</height>
+                            </rect>
+                           </property>
+                           <column>
+                            <property name="text">
+                             <string>Cantidad</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Fecha</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Total</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Usuario</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Cliente</string>
+                            </property>
+                           </column>
+                          </widget>
+                          <widget class="QTableWidget" name="tabla_factura_2">
+                           <property name="geometry">
+                            <rect>
+                             <x>20</x>
+                             <y>190</y>
+                             <width>311</width>
+                             <height>211</height>
+                            </rect>
+                           </property>
+                           <column>
+                            <property name="text">
+                             <string>Codigo</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Cantidad</string>
+                            </property>
+                           </column>
+                           <column>
+                            <property name="text">
+                             <string>Sub_total</string>
+                            </property>
+                           </column>
+                          </widget>
+                          <widget class="QLabel" name="label_35">
+                           <property name="geometry">
+                            <rect>
+                             <x>250</x>
+                             <y>10</y>
+                             <width>291</width>
+                             <height>31</height>
+                            </rect>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">color: rgb(188, 11, 91);
+font: 75 17pt &quot;Orbitron&quot;;</string>
+                           </property>
+                           <property name="text">
+                            <string>Detellas de la venta</string>
                            </property>
                           </widget>
                          </widget>
@@ -1697,8 +1765,8 @@ font: 87 10pt &quot;Arial Black&quot;;
                           <widget class="QTableWidget" name="tabla_venta">
                            <property name="geometry">
                             <rect>
-                             <x>450</x>
-                             <y>200</y>
+                             <x>140</x>
+                             <y>220</y>
                              <width>301</width>
                              <height>192</height>
                             </rect>
@@ -1827,6 +1895,9 @@ font: 75 12pt &quot;Orbitron&quot;;</string>
                            </property>
                           </widget>
                           <widget class="QLineEdit" name="txt_usuario_venta">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
                            <property name="geometry">
                             <rect>
                              <x>520</x>
@@ -1908,8 +1979,8 @@ font: 87 10pt &quot;Arial Black&quot;;
                           <widget class="QTableWidget" name="tabla_venta_detalle">
                            <property name="geometry">
                             <rect>
-                             <x>130</x>
-                             <y>200</y>
+                             <x>450</x>
+                             <y>220</y>
                              <width>301</width>
                              <height>192</height>
                             </rect>
@@ -1929,6 +2000,70 @@ font: 87 10pt &quot;Arial Black&quot;;
                              <string>Total</string>
                             </property>
                            </column>
+                          </widget>
+                          <widget class="QPushButton" name="btn_finalizar_venta_2">
+                           <property name="geometry">
+                            <rect>
+                             <x>720</x>
+                             <y>20</y>
+                             <width>21</width>
+                             <height>21</height>
+                            </rect>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">QPushButton{
+border: 2px solid #d2015d;
+border-radius: 8px;
+
+background-color: #fba4c7;
+font: 87 9pt &quot;Arial Black&quot;;
+color: #d2015d;
+}
+QPushButton:hover{
+background-color: white;
+font: 87 10pt &quot;Arial Black&quot;;
+}
+
+
+</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                          <widget class="QLabel" name="label_36">
+                           <property name="geometry">
+                            <rect>
+                             <x>160</x>
+                             <y>190</y>
+                             <width>171</width>
+                             <height>16</height>
+                            </rect>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">color: rgb(188, 11, 91);
+font: 75 12pt &quot;Orbitron&quot;;</string>
+                           </property>
+                           <property name="text">
+                            <string>Tabla Pre venta</string>
+                           </property>
+                          </widget>
+                          <widget class="QLabel" name="label_37">
+                           <property name="geometry">
+                            <rect>
+                             <x>450</x>
+                             <y>180</y>
+                             <width>221</width>
+                             <height>16</height>
+                            </rect>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">color: rgb(188, 11, 91);
+font: 75 12pt &quot;Orbitron&quot;;</string>
+                           </property>
+                           <property name="text">
+                            <string>Tabla  venta Finalizada</string>
+                           </property>
                           </widget>
                           <zorder>btn_guardar_venta</zorder>
                           <zorder>txt_codigo_venta</zorder>
@@ -1951,6 +2086,9 @@ font: 87 10pt &quot;Arial Black&quot;;
                           <zorder>btn_revisar_cliente</zorder>
                           <zorder>tabla_venta_detalle</zorder>
                           <zorder>tabla_venta</zorder>
+                          <zorder>btn_finalizar_venta_2</zorder>
+                          <zorder>label_36</zorder>
+                          <zorder>label_37</zorder>
                          </widget>
                         </item>
                        </layout>
@@ -2039,28 +2177,6 @@ QPushButton:hover{
                          </property>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QPushButton" name="btn_eliminar_venta">
-                         <property name="styleSheet">
-                          <string notr="true">QPushButton{
-    border: 2px solid #d2015d;
-    border-radius: 6px;
-    background-color: #fba4c7;
-    font: 60 10pt &quot;Arial Black&quot;;
-    color: #d2015d;
-    min-width: 100px;
-}
-QPushButton:hover{
-    background-color: white;
-    font: 70 10pt &quot;Arial Black&quot;;
-}
-</string>
-                         </property>
-                         <property name="text">
-                          <string>ELIMINAR</string>
-                         </property>
-                        </widget>
-                       </item>
                       </layout>
                      </widget>
                     </item>
@@ -2095,7 +2211,7 @@ QPushButton:hover{
                     <string notr="true">background-color: #fba4c7;</string>
                    </property>
                    <property name="currentIndex">
-                    <number>1</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="page_crear_cliente">
                     <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -2444,7 +2560,7 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                          <string notr="true">border-color: rgb(188, 11, 91);</string>
                         </property>
                         <attribute name="verticalHeaderVisible">
-                         <bool>true</bool>
+                         <bool>false</bool>
                         </attribute>
                         <attribute name="verticalHeaderDefaultSectionSize">
                          <number>30</number>
@@ -2736,7 +2852,7 @@ QPushButton:hover{
                     <string notr="true">background-color: rgb(251, 164, 199);</string>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>2</number>
                    </property>
                    <widget class="QWidget" name="page_crear_u">
                     <widget class="QPushButton" name="btn_g_u">
@@ -3124,6 +3240,9 @@ QPushButton:hover{
                    </widget>
                    <widget class="QWidget" name="page_mostrar_usuario">
                     <widget class="QLineEdit" name="txt_tipo_ver">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="geometry">
                       <rect>
                        <x>310</x>
@@ -3143,6 +3262,9 @@ font: 75 10pt&quot;Times New Roman&quot;;
                      </property>
                     </widget>
                     <widget class="QLineEdit" name="txt_admin_menu">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
                      <property name="geometry">
                       <rect>
                        <x>60</x>

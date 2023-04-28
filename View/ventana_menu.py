@@ -56,7 +56,7 @@ class Main_window(QMainWindow):
 		self.bt_uno.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_uno))
 		self.bt_dos.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_dos))
 		self.bt_tres.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_tres))
-		self.bt_cuatro.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cuatro))
+		# self.bt_cuatro.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cuatro))
 		# self.bt_cinco.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_cinco))
 
 		# ver paginas-----
@@ -136,6 +136,8 @@ class Main_window(QMainWindow):
 		self.btn_revisar_cliente.clicked.connect(self.revisar_cliente)
 		self.btn_guardar_venta_2.clicked.connect(self.detalle_venta)
 		# correcto self.btn_finalizar_venta.clicked.connect(self.pasar_datos_tabla)
+		self.btn_ver_factura.clicked.connect(self.ultima_venta)
+		self.btn_finalizar_venta_2.clicked.connect(self.ultima_detalle)
 
 
 	def control_bt_minimizar(self):
@@ -377,7 +379,7 @@ class Main_window(QMainWindow):
 			self.tabla_pre_venta.setItem(0, 3, QTableWidgetItem(str(row[3])))
 			self.tabla_pre_venta.setItem(0, 4, QTableWidgetItem(str(row[4])))
 
-	def guardar_datos(self):
+	def guardar_datosoficial(self):
 		try:
 			self.conn = conecciones()
 			cursor = self.conn.cursor()
@@ -398,6 +400,42 @@ class Main_window(QMainWindow):
 			# Insertar los datos en la base de datos
 			insert_query = """INSERT INTO inventario (codigo_carro, producto, existencia, precio_costo, precio_venta) 
 	                            VALUES (%s, %s, %s, %s, %s)"""
+			cursor.executemany(insert_query, datos)
+			self.conn.commit()
+
+			# Borrar los datos del QTableWidget
+			self.tabla_pre_venta.clearContents()
+			self.tabla_pre_venta.setRowCount(0)
+
+			self.limpiar_campos()
+
+		except ValueError as ve:
+			print(f"Error al guardar datos en la base de datos: {ve}")
+		except Exception as e:
+			print(f"Error al guardar datos en la base de datos: {e}")
+
+	def guardar_datos(self):
+		try:
+			self.conn = conecciones()
+			cursor = self.conn.cursor()
+
+			# Recorrer el QTableWidget y agregar los datos a una lista de tuplas
+			datos = []
+			for fila in range(self.tabla_pre_venta.rowCount()):
+				codigo = self.tabla_pre_venta.item(fila, 0).text()
+				carro = self.tabla_pre_venta.item(fila, 1).text()
+				cantidad = self.tabla_pre_venta.item(fila, 2).text()
+				precioc = self.tabla_pre_venta.item(fila, 3).text()
+				preciov = self.tabla_pre_venta.item(fila, 4).text()
+				if not cantidad.isdigit():
+					# Si el campo existencia no es un número, no se puede insertar en la base de datos
+					raise ValueError("La cantidad debe ser un número entero")
+				datos.append((codigo, carro, cantidad, precioc, preciov))
+
+			# Insertar los datos en la base de datos
+			insert_query = """INSERT INTO inventario (codigo_carro, producto, existencia, precio_costo, precio_venta) 
+	                          VALUES (%s, %s, %s, %s, %s)
+	                          ON DUPLICATE KEY UPDATE existencia = existencia + VALUES(existencia)"""
 			cursor.executemany(insert_query, datos)
 			self.conn.commit()
 
@@ -715,6 +753,7 @@ class Main_window(QMainWindow):
 
 		self.limpiar_campos_venta()
 		self.tabla_venta.setRowCount(0)  # Eliminar las filas de la tabla
+		QMessageBox.information(None, "Venta", "Venta Hecha")
 
 	def limpiar_campos_venta(self):
 		self.tabla_venta.clearContents()
@@ -865,3 +904,60 @@ class Main_window(QMainWindow):
 		self.txt_nombre_u.clear()
 		self.txt_apellido_u.clear()
 		self.txt_puesto_u.clear()
+
+	def ultima_venta1(self):
+		self.conn = conecciones()
+		cursor = self.conn.cursor()
+		cursor.execute(
+			'SELECT cantidad, fecha, Total, Usuario_id, Cliente_id FROM Venta WHERE idVenta = (SELECT MAX(idVenta) FROM Venta)')
+		resultados = cursor.fetchall()
+		print(resultados)
+		fila = resultados[0]
+		self.tabla_factura.setRowCount(1)  # Asignar 1 fila para el registro
+		self.tabla_factura.setColumnCount(len(fila))  # Asignar la cantidad adecuada de columnas
+		for j, valor in enumerate(fila):
+			item = QtWidgets.QTableWidgetItem(str(valor))
+			self.tabla_factura.setItem(0, j, item)
+		self.conn.close()
+
+	def ultima_venta(self):
+		self.conn = conecciones()
+		cursor = self.conn.cursor()
+		cursor.execute(
+			'SELECT Venta.cantidad, Venta.fecha, Venta.Total, Usuario.usuario, Cliente.nombre_cliente FROM Venta JOIN Usuario ON Venta.Usuario_id = idUsuario JOIN Cliente ON Venta.Cliente_id = idCliente WHERE Venta.idVenta = (SELECT MAX(idVenta) FROM Venta)')
+		resultados = cursor.fetchall()
+		print(resultados)
+		fila = resultados[0]
+		self.tabla_factura.setRowCount(1)
+		self.tabla_factura.setColumnCount(len(fila))
+		for j, valor in enumerate(fila):
+			item = QtWidgets.QTableWidgetItem(str(valor))
+			self.tabla_factura.setItem(0, j, item)
+		self.conn.close()
+
+	def ultima_detalle(self):
+		datos = []
+		for fila in range(self.tabla_venta.rowCount()):
+			fila_datos = []
+			for columna in range(self.tabla_venta.columnCount()):
+				item = self.tabla_venta.item(fila, columna)
+				fila_datos.append(item.text())
+			datos.append(fila_datos)
+
+		# Limpiar la segunda QTableWidget
+		# self.tabla_venta_detalle.clear()
+
+		# Configurar las columnas y filas en la segunda QTableWidget
+		self.tabla_factura_2.setColumnCount(len(datos[0]))
+		self.tabla_factura_2.setRowCount(len(datos))
+
+		# Copiar los nombres de las columnas de la primera QTableWidget a la segunda
+		for columna in range(self.tabla_venta.columnCount()):
+			nombre_columna = self.tabla_venta.horizontalHeaderItem(columna).text()
+			self.tabla_factura_2.setHorizontalHeaderItem(columna, QtWidgets.QTableWidgetItem(nombre_columna))
+
+		# Insertar los datos en la segunda QTableWidget
+		for fila, fila_datos in enumerate(datos):
+			for columna, dato in enumerate(fila_datos):
+				item = QtWidgets.QTableWidgetItem(str(dato))
+				self.tabla_factura_2.setItem(fila, columna, item)

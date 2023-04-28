@@ -22,6 +22,7 @@ class ModeloCliente():
         if nombre and nit and celular and direccion and tipo:
             print("-DATOS ENVIANDOS---")
             self.cliente.insertarCliente(nombre, nit, celular, direccion, tipo)
+        QMessageBox.information(None, "Cliente", "El cliente está en la base de datos")
 
     def eliminar_cliente(self, table):
         self.cliente = RegistarCliente()
