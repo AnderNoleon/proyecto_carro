@@ -7,6 +7,7 @@ from PyQt5 import uic, QtCore, QtWidgets
 from View import Main_window
 from server.conexion_sql import conecciones
 import datetime
+import hashlib
 
 
 class Main_login(QMainWindow):
@@ -37,7 +38,7 @@ class Main_login(QMainWindow):
         else:
             print("Contrseña incorrecta")
 
-    def abrir(self):
+    def abrir2(self):
         usuario = self.txt_login.text()
         contra = self.txt_password.text()
 
@@ -65,14 +66,41 @@ class Main_login(QMainWindow):
 
     def bloquear_tipo(self):
         if self.ventana_principal.txt_tipo_ver.text() == "Vendedor":
-            print("ENTRO")
+            print("Vendedor")
             # Deshabilitar los botones que se deben bloquear para los vendedores
             self.ventana_principal.bt_inicio.setEnabled(False)
             self.ventana_principal.bt_tres.setEnabled(False)
 
         elif self.ventana_principal.txt_tipo_ver.text() == "Gerente":
-            print("Nada")
+            print("Gerente")
             # No hacer nada si el valor es diferente de "Vendedor"
             pass
 
+    def abrir(self):
+        usuario = self.txt_login.text()
+        contra = self.txt_password.text()
 
+        cursor = self.conn.cursor()
+        query = "SELECT * FROM usuario WHERE usuario = %s"
+        cursor.execute(query, (usuario,))
+        result = cursor.fetchone()
+
+        if result:
+            hashed_password = result[2]  # obtener la contraseña encriptada desde la base de datos
+            if hashlib.sha256(contra.encode()).hexdigest() == hashed_password:
+                # Mostrar la ventana principal
+                self.ventana_principal.show()
+                self.hide()
+
+                # Obtener el puesto del usuario
+                puesto = result[5]
+
+                # Actualizar el objeto QLineEdit en la ventana principal
+                self.ventana_principal.txt_admin_menu.setText(usuario)
+                self.ventana_principal.txt_tipo_ver.setText(puesto)
+                # corregir para que solo se pueda ver el nombre
+                self.ventana_principal.txt_usuario_venta.setText(usuario)
+            else:
+                QMessageBox.critical(self, "Error de inicio de sesión", "Usuario o contraseña incorrectos")
+        else:
+            QMessageBox.critical(self, "Error de inicio de sesión", "Usuario o contraseña incorrectos")

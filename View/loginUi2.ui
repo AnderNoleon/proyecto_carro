@@ -236,26 +236,6 @@ padding-bottom:7px;</string>
      <string>Cars 1/64</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_crear">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>310</y>
-      <width>191</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Crear</string>
-    </property>
-   </widget>
   </widget>
  </widget>
  <resources/>

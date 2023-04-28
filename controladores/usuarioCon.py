@@ -33,7 +33,7 @@ class RegistrarUsuario:
         self.conn = conecciones()
         id = self.obtener_id_usuario()
         with self.conn.cursor() as cursor:
-            sql = """INSERT INTO usuario (idUsuario,usuario,nombre,apellido,puesto) VALUES (%s,%s,%s,%s,%s,%s)"""
+            sql = """INSERT INTO Usuario (idUsuario,usuario,contrasena,nombre,apellido,puesto) VALUES (%s,%s,%s,%s,%s,%s)"""
             cursor.execute(sql, (id, usuario, contrasena, nombre, apellido, puesto))
             self.conn.commit()
 

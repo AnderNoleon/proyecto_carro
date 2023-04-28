@@ -62,6 +62,7 @@ class Main_window(QMainWindow):
 		# ver paginas-----
 		self.btn_usuario_editar.clicked.connect(self.page_usuario)
 		self.btn_usuario_ver.clicked.connect(self.page_usuario_v)
+		self.btn_crear_sesion.clicked.connect(self.page_usuario_c)
 		# ver paginas -- CLIENTE
 		self.btn_crear_cliente.clicked.connect(self.page_cliente)
 		self.btn_editar_cliente.clicked.connect(self.page_cliente_v)
@@ -93,7 +94,13 @@ class Main_window(QMainWindow):
 		self.btn_actualizar_usuario.clicked.connect(lambda: self.modelo_usuario.subir_usuarios(self.tabla_usuario))
 		self.btn_eliminar_usuario.clicked.connect(lambda: self.modelo_usuario.eliminar_Usuario(self.tabla_usuario))
 		# self.btn_salir_usuario.clicked.connect(self.salir_usuario)
-		# self.ventana_inicio = Main_login()
+		self.btn_g_u.clicked.connect(
+			lambda: self.modelo_usuario.crearUsuario(self.txt_nombre_usuario_c.text(), self.txt_contra_u.text(),
+													 self.txt_nombre_u.text(),
+													 self.txt_apellido_u.text(),
+													 self.txt_puesto_u.text()))
+
+		self.btn_g_u.clicked.connect(self.limpiar_campos_usuario)
 
 		# TODO PARA CLIENTES
 		self.bt_guardar_cliente.clicked.connect(self.borrar_cliente)
@@ -193,6 +200,9 @@ class Main_window(QMainWindow):
 
 	def page_usuario_v(self):
 		self.stackedWidget_2.setCurrentWidget(self.page_mostrar_usuario)
+
+	def page_usuario_c(self):
+		self.stackedWidget_2.setCurrentWidget(self.page_crear_u)
 
 	def page_cliente(self):
 		self.stackedWidget_3.setCurrentWidget(self.page_crear_cliente)
@@ -849,3 +859,9 @@ class Main_window(QMainWindow):
 	def limpiar_campos_venta_detalle(self):
 		self.tabla_venta_detalle.clearContents()
 
+	def limpiar_campos_usuario(self):
+		self.txt_nombre_usuario_c.clear()
+		self.txt_contra_u.clear()
+		self.txt_nombre_u.clear()
+		self.txt_apellido_u.clear()
+		self.txt_puesto_u.clear()

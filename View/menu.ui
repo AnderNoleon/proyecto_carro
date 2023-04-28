@@ -2095,7 +2095,7 @@ QPushButton:hover{
                     <string notr="true">background-color: #fba4c7;</string>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>1</number>
                    </property>
                    <widget class="QWidget" name="page_crear_cliente">
                     <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -2423,14 +2423,32 @@ font: 75 12pt &quot;Arial Narrow&quot;;
                         <enum>QFrame::Raised</enum>
                        </property>
                        <widget class="QTableWidget" name="tabla_cliente">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
                         <property name="geometry">
                          <rect>
-                          <x>10</x>
-                          <y>10</y>
-                          <width>711</width>
-                          <height>341</height>
+                          <x>30</x>
+                          <y>30</y>
+                          <width>751</width>
+                          <height>291</height>
                          </rect>
                         </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true">border-color: rgb(188, 11, 91);</string>
+                        </property>
+                        <attribute name="verticalHeaderVisible">
+                         <bool>true</bool>
+                        </attribute>
+                        <attribute name="verticalHeaderDefaultSectionSize">
+                         <number>30</number>
+                        </attribute>
                         <column>
                          <property name="text">
                           <string>id</string>
@@ -2720,6 +2738,233 @@ QPushButton:hover{
                    <property name="currentIndex">
                     <number>0</number>
                    </property>
+                   <widget class="QWidget" name="page_crear_u">
+                    <widget class="QPushButton" name="btn_g_u">
+                     <property name="geometry">
+                      <rect>
+                       <x>600</x>
+                       <y>90</y>
+                       <width>104</width>
+                       <height>23</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton{
+    border: 2px solid #d2015d;
+    border-radius: 6px;
+    background-color: #fba4c7;
+    font: 60 10pt &quot;Arial Black&quot;;
+    color: #d2015d;
+    min-width: 100px;
+}
+QPushButton:hover{
+    background-color: white;
+    font: 70 10pt &quot;Arial Black&quot;;
+}
+</string>
+                     </property>
+                     <property name="text">
+                      <string>Guardar</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_29">
+                     <property name="geometry">
+                      <rect>
+                       <x>240</x>
+                       <y>20</y>
+                       <width>391</width>
+                       <height>51</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(188, 11, 91);
+font: 75 20pt &quot;Orbitron&quot;;</string>
+                     </property>
+                     <property name="text">
+                      <string>Creacion de Usuarios</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_30">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>100</y>
+                       <width>101</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(188, 11, 91);
+font: 75 16pt &quot;Orbitron&quot;;</string>
+                     </property>
+                     <property name="text">
+                      <string>Usuario</string>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="txt_nombre_usuario_c">
+                     <property name="geometry">
+                      <rect>
+                       <x>210</x>
+                       <y>100</y>
+                       <width>361</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit{
+border: 2px solid #bc0b5b;
+border-radius: 6px;
+color: rgb(210, 1, 93);
+background-color:rgb(251, 164, 199);
+font: 75 10pt&quot;Times New Roman&quot;;
+}</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_31">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>160</y>
+                       <width>151</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(188, 11, 91);
+font: 75 16pt &quot;Orbitron&quot;;</string>
+                     </property>
+                     <property name="text">
+                      <string>Contraseña</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_32">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>210</y>
+                       <width>101</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(188, 11, 91);
+font: 75 16pt &quot;Orbitron&quot;;</string>
+                     </property>
+                     <property name="text">
+                      <string>Nombre</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_33">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>310</y>
+                       <width>101</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(188, 11, 91);
+font: 75 16pt &quot;Orbitron&quot;;</string>
+                     </property>
+                     <property name="text">
+                      <string>Puesto</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_34">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>260</y>
+                       <width>101</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(188, 11, 91);
+font: 75 16pt &quot;Orbitron&quot;;</string>
+                     </property>
+                     <property name="text">
+                      <string>Apellido</string>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="txt_contra_u">
+                     <property name="geometry">
+                      <rect>
+                       <x>210</x>
+                       <y>160</y>
+                       <width>361</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit{
+border: 2px solid #bc0b5b;
+border-radius: 6px;
+color: rgb(210, 1, 93);
+background-color:rgb(251, 164, 199);
+font: 75 10pt&quot;Times New Roman&quot;;
+}</string>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="txt_nombre_u">
+                     <property name="geometry">
+                      <rect>
+                       <x>210</x>
+                       <y>220</y>
+                       <width>361</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit{
+border: 2px solid #bc0b5b;
+border-radius: 6px;
+color: rgb(210, 1, 93);
+background-color:rgb(251, 164, 199);
+font: 75 10pt&quot;Times New Roman&quot;;
+}</string>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="txt_apellido_u">
+                     <property name="geometry">
+                      <rect>
+                       <x>210</x>
+                       <y>270</y>
+                       <width>361</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit{
+border: 2px solid #bc0b5b;
+border-radius: 6px;
+color: rgb(210, 1, 93);
+background-color:rgb(251, 164, 199);
+font: 75 10pt&quot;Times New Roman&quot;;
+}</string>
+                     </property>
+                    </widget>
+                    <widget class="QLineEdit" name="txt_puesto_u">
+                     <property name="geometry">
+                      <rect>
+                       <x>210</x>
+                       <y>320</y>
+                       <width>361</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QLineEdit{
+border: 2px solid #bc0b5b;
+border-radius: 6px;
+color: rgb(210, 1, 93);
+background-color:rgb(251, 164, 199);
+font: 75 10pt&quot;Times New Roman&quot;;
+}</string>
+                     </property>
+                    </widget>
+                   </widget>
                    <widget class="QWidget" name="page_editar_usuario">
                     <layout class="QVBoxLayout" name="verticalLayout_11">
                      <item>
@@ -2878,40 +3123,12 @@ QPushButton:hover{
                     </layout>
                    </widget>
                    <widget class="QWidget" name="page_mostrar_usuario">
-                    <widget class="QPushButton" name="pushButton_7">
-                     <property name="geometry">
-                      <rect>
-                       <x>310</x>
-                       <y>50</y>
-                       <width>141</width>
-                       <height>23</height>
-                      </rect>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton{
-    border: 2px solid #d2015d;
-    border-radius: 6px;
-    background-color: #fba4c7;
-    font: 60 10pt &quot;Arial Black&quot;;
-    color: #d2015d;
-    min-width: 100px;
-}
-QPushButton:hover{
-    background-color: white;
-    font: 70 10pt &quot;Arial Black&quot;;
-}
-</string>
-                     </property>
-                     <property name="text">
-                      <string>bTN</string>
-                     </property>
-                    </widget>
                     <widget class="QLineEdit" name="txt_tipo_ver">
                      <property name="geometry">
                       <rect>
-                       <x>170</x>
-                       <y>50</y>
-                       <width>113</width>
+                       <x>310</x>
+                       <y>130</y>
+                       <width>231</width>
                        <height>20</height>
                       </rect>
                      </property>
@@ -2928,9 +3145,9 @@ font: 75 10pt&quot;Times New Roman&quot;;
                     <widget class="QLineEdit" name="txt_admin_menu">
                      <property name="geometry">
                       <rect>
-                       <x>40</x>
-                       <y>50</y>
-                       <width>113</width>
+                       <x>60</x>
+                       <y>130</y>
+                       <width>231</width>
                        <height>20</height>
                       </rect>
                      </property>
@@ -2942,6 +3159,23 @@ color: rgb(210, 1, 93);
 background-color:rgb(251, 164, 199);
 font: 75 10pt&quot;Times New Roman&quot;;
 }</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_28">
+                     <property name="geometry">
+                      <rect>
+                       <x>200</x>
+                       <y>40</y>
+                       <width>391</width>
+                       <height>51</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(188, 11, 91);
+font: 75 20pt &quot;Orbitron&quot;;</string>
+                     </property>
+                     <property name="text">
+                      <string>Visualizar Usuario</string>
                      </property>
                     </widget>
                    </widget>
@@ -2989,7 +3223,7 @@ font: 75 10pt&quot;Times New Roman&quot;;
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="btn_salir_sesion">
+                  <widget class="QPushButton" name="btn_crear_sesion">
                    <property name="styleSheet">
                     <string notr="true">QPushButton{
     border: 2px solid #d2015d;
@@ -3006,7 +3240,7 @@ QPushButton:hover{
 </string>
                    </property>
                    <property name="text">
-                    <string>Salir</string>
+                    <string>Crear</string>
                    </property>
                   </widget>
                  </item>
