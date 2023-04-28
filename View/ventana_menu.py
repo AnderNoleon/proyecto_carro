@@ -704,6 +704,7 @@ class Main_window(QMainWindow):
 		self.conn.close()
 
 		self.limpiar_campos_venta()
+		self.tabla_venta.setRowCount(0)  # Eliminar las filas de la tabla
 
 	def limpiar_campos_venta(self):
 		self.tabla_venta.clearContents()
@@ -759,6 +760,49 @@ class Main_window(QMainWindow):
 				item = QtWidgets.QTableWidgetItem(str(dato))
 				self.tabla_venta_detalle.setItem(fila, columna, item)
 
+	def detalle_venta1(self):
+		try:
+			self.conn = conecciones()
+			cursor = self.conn.cursor()
+
+			# Obtener el último idVenta en la tabla Venta
+			cursor.execute("SELECT MAX(idVenta) FROM Venta")
+			ultimo_id_venta = cursor.fetchone()[0]
+
+			# Mostrar detalle de venta
+			for fila in range(self.tabla_venta_detalle.rowCount()):
+				codigo_carro = self.tabla_venta_detalle.item(fila, 0).text()
+				consulta = """
+	                SELECT idInventario
+	                FROM Inventario
+	                WHERE codigo_carro = %s
+	            """
+				cursor.execute(consulta, (codigo_carro,))
+				idInventario = cursor.fetchone()[0]
+				cantidad = self.tabla_venta_detalle.item(fila, 1).text()
+				precio = self.tabla_venta_detalle.item(fila, 2).text()
+
+				# Insertar detalle de venta en tabla detalle_venta
+				consulta = """
+	                INSERT INTO detalle_venta (venta_id, inventario_id, codigo, cantidad, sub_total)
+	                VALUES (%s, %s, %s, %s, %s)
+	            """
+				sub_total = 1 * float(precio)
+				valores = (ultimo_id_venta, idInventario, codigo_carro, cantidad, sub_total)
+				cursor.execute(consulta, valores)
+				self.conn.commit()
+
+				print(
+					f" IdVenta: {ultimo_id_venta}, IdInventario: {idInventario}, Código de carro: {codigo_carro}, Cantidad: {cantidad}, Precio: {precio}")
+
+			self.limpiar_campos_venta_detalle()
+
+		except Exception as e:
+			print(f"Ocurrió un error: {e}")
+
+	def limpiar_campos_venta_detalle1(self):
+		self.tabla_venta_detalle.clearContents()
+
 	def detalle_venta(self):
 		try:
 			self.conn = conecciones()
@@ -794,8 +838,14 @@ class Main_window(QMainWindow):
 				print(
 					f" IdVenta: {ultimo_id_venta}, IdInventario: {idInventario}, Código de carro: {codigo_carro}, Cantidad: {cantidad}, Precio: {precio}")
 
+			self.limpiar_campos_venta_detalle()
+			self.tabla_venta_detalle.clearContents()  # Eliminar contenido de la tabla
+			self.tabla_venta_detalle.setRowCount(0)  # Eliminar las filas de la tabla
+			self.txt_cliente_venta.clear()
+
 		except Exception as e:
 			print(f"Ocurrió un error: {e}")
 
-
+	def limpiar_campos_venta_detalle(self):
+		self.tabla_venta_detalle.clearContents()
 
